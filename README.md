@@ -56,30 +56,6 @@ $teamspeak = TeamSpeak::factory()
     ->make();
 ```
 
-## Handling empty results
-
-Due to TeamSpeak 3 documentation, empty results for any of commands will return an error error `1281` - `ERROR_database_empty_result`, it means that this client will throw `ErrorException` if it happens.
-
-To handle this correctly, you can use code like this:
-
-```php
-use TeamSpeak\WebQuery\Exceptions\ErrorException;
-
-$teamspeak = TeamSpeak::client('100.100.100.100:10080', 'my-api-key', 1);
-
-try {
-    $channels = $teamspeak->channels()->list()->channels;
-} catch (ErrorException $e) {
-    if ($e->getErrorCode() !== 1281) {
-        throw $e;
-    }
-    
-    $channels = [];
-}
-```
-
-> Note: This behaviour strange and not friendly and will be changed in the future versions.
-
 ## Testing
 
 ```bash
