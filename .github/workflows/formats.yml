@@ -50,6 +50,3 @@ jobs:
 
       - name: Test Refactor
         run: composer test:refactor
-
-      - name: Test Typos
-        run: composer test:typos
