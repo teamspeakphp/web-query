@@ -1,0 +1,496 @@
+# Implemented commands
+This page contains a list of all available client commands.
+
+Due to differences in operation, the following ServerQuery commands are currently unsupported in WebQuery:
+* `ft*` e.g. (`ftcreatedir`, `ftdeletefile`)
+* `help`
+* `login` and `logout`
+* `quit`
+* `servernotifyregister` and `servernotifyunregister`
+* `use`
+
+## version
+
+Not implemented.
+
+## hostinfo
+
+Not implemented.
+
+## instanceinfo
+
+Not implemented.
+
+## instanceedit
+
+Not implemented.
+
+## bindinglist
+
+Not implemented.
+
+## serverlist
+
+Not implemented.
+
+## serveridgetbyport
+
+Not implemented.
+
+## serverdelete
+
+Not implemented.
+
+## servercreate
+
+Not implemented.
+
+## serverstart
+
+Not implemented.
+
+## serverstop
+
+Not implemented.
+
+## serverprocessstop
+
+Not implemented.
+
+## serverinfo
+
+Not implemented.
+
+## serverrequestconnectioninfo
+
+Not implemented.
+
+## servertemppasswordadd
+
+Not implemented.
+
+## servertemppassworddel
+
+Not implemented.
+
+## servertemppasswordlist
+
+Not implemented.
+
+## serveredit
+
+Not implemented.
+
+## servergrouplist
+
+Not implemented.
+
+## servergroupadd
+
+Not implemented.
+
+## servergroupdel
+
+Not implemented.
+
+## servergroupcopy
+
+Not implemented.
+
+## servergrouprename
+
+Not implemented.
+
+## servergrouppermlist
+
+Not implemented.
+
+## servergroupaddperm
+
+Not implemented.
+
+## servergroupdelperm
+
+Not implemented.
+
+## servergroupaddclient
+
+Not implemented.
+
+## servergroupdelclient
+
+Not implemented.
+
+## servergroupclientlist
+
+Not implemented.
+
+## servergroupsbyclientid
+
+Not implemented.
+
+## servergroupautoaddperm
+
+Not implemented.
+
+## servergroupautodelperm
+
+Not implemented.
+
+## serversnapshotcreate
+
+Not implemented.
+
+## serversnapshotdeploy
+
+Not implemented.
+
+## sendtextmessage
+
+Not implemented.
+
+## logview
+
+Not implemented.
+
+## logadd
+
+Not implemented.
+
+## gm
+
+Not implemented.
+
+## channellist
+
+```php
+$teamspeak->channels()->list();
+```
+
+## channelinfo
+
+```php
+$teamspeak->channels()->info();
+```
+
+## channelfind
+
+```php
+$teamspeak->channels()->find();
+```
+
+## channelmove
+
+```php
+$teamspeak->channels()->move();
+```
+
+## channelcreate
+
+```php
+$teamspeak->channels()->create();
+```
+
+## channeldelete
+
+```php
+$teamspeak->channels()->delete();
+```
+
+## channeledit
+
+```php
+$teamspeak->channels()->edit();
+```
+
+## channelgrouplist
+
+Not implemented.
+
+## channelgroupadd
+
+Not implemented.
+
+## channelgroupdel
+
+Not implemented.
+
+## channelgroupcopy
+
+Not implemented.
+
+## channelgrouprename
+
+Not implemented.
+
+## channelgroupaddperm
+
+Not implemented.
+
+## channelgrouppermlist
+
+Not implemented.
+
+## channelgroupdelperm
+
+Not implemented.
+
+## channelgroupclientlist
+
+Not implemented.
+
+## setclientchannelgroup
+
+Not implemented.
+
+## tokenadd
+
+Not implemented.
+
+## tokendelete
+
+Not implemented.
+
+## tokenlist
+
+Not implemented.
+
+## tokenuse
+
+Not implemented.
+
+## channelpermlist
+
+Not implemented.
+
+## channeladdperm
+
+Not implemented.
+
+## channeldelperm
+
+Not implemented.
+
+## clientlist
+
+Not implemented.
+
+## clientinfo
+
+Not implemented.
+
+## clientfind
+
+Not implemented.
+
+## clientedit
+
+Not implemented.
+
+## clientdblist
+
+```php
+$teamspeak->databaseClients()->list();
+```
+
+## clientdbinfo
+
+```php
+$teamspeak->databaseClients()->info();
+```
+
+## clientdbfind
+
+```php
+$teamspeak->databaseClients()->find();
+// also available few shortcuts:
+$teamspeak->databaseClients()->findByName();
+$teamspeak->databaseClients()->findByUid();
+```
+
+## clientdbedit
+
+```php
+$teamspeak->databaseClients()->edit();
+// also available a shortcut:
+$teamspeak->databaseClients()->editDescription();
+```
+
+## clientdbdelete
+
+```php
+$teamspeak->databaseClients()->delete();
+```
+
+## clientgetids
+
+Not implemented.
+
+## clientgetdbidfromuid
+
+Not implemented.
+
+## clientgetnamefromuid
+
+Not implemented.
+
+## clientgetuidfromclid
+
+Not implemented.
+
+## clientgetnamefromdbid
+
+Not implemented.
+
+## clientsetserverquerylogin
+
+Not implemented.
+
+## clientupdate
+
+Not implemented.
+
+## clientmove
+
+Not implemented.
+
+## clientkick
+
+Not implemented.
+
+## clientpoke
+
+Not implemented.
+
+## clientpermlist
+
+Not implemented.
+
+## clientaddperm
+
+Not implemented.
+
+## clientdelperm
+
+Not implemented.
+
+## channelclientpermlist
+
+Not implemented.
+
+## channelclientaddperm
+
+Not implemented.
+
+## channelclientdelperm
+
+Not implemented.
+
+## permissionlist
+
+Not implemented.
+
+## permidgetbyname
+
+Not implemented.
+
+## permoverview
+
+Not implemented.
+
+## permget
+
+Not implemented.
+
+## permfind
+
+Not implemented.
+
+## permreset
+
+Not implemented.
+
+## privilegekeylist
+
+Not implemented.
+
+## privilegekeyadd
+
+Not implemented.
+
+## privilegekeydelete
+
+Not implemented.
+
+## privilegekeyuse
+
+Not implemented.
+
+## messagelist
+
+Not implemented.
+
+## messageadd
+
+Not implemented.
+
+## messagedel
+
+Not implemented.
+
+## messageget
+
+Not implemented.
+
+## messageupdateflag
+
+Not implemented.
+
+## complainlist
+
+Not implemented.
+
+## complainadd
+
+Not implemented.
+
+## complaindelall
+
+Not implemented.
+
+## complaindel
+
+Not implemented.
+
+## banclient
+
+Not implemented.
+
+## banlist
+
+Not implemented.
+
+## banadd
+
+Not implemented.
+
+## bandel
+
+Not implemented.
+
+## bandelall
+
+Not implemented.
+
+## customsearch
+
+Not implemented.
+
+## custominfo
+
+Not implemented.
+
+## whoami
+
+Not implemented.
+
