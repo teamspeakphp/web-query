@@ -91,6 +91,10 @@ final readonly class HttpTransporter implements TransporterContract
             return;
         }
 
+        if ($status->code() === 1281 && $status->message() === 'database empty result set') {
+            return;
+        }
+
         throw new ErrorException($response['status'], $statusCode);
     }
 }

@@ -124,6 +124,26 @@ test('request object server without status', function () {
     $this->http->request($payload);
 })->throws(InvalidResponse::class, 'Invalid response: missing status key.');
 
+test('request object server empty result', function () {
+    $payload = new Payload(Command::Version);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => [
+            'code' => 1281,
+            'message' => 'database empty result set',
+        ],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->andReturn($response);
+
+    $response = $this->http->request($payload);
+
+    expect($response->body())->toBe([]);
+});
+
 test('request object serialization errors', function () {
     $payload = new Payload(Command::Version);
 
