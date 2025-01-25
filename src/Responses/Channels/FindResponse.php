@@ -12,6 +12,8 @@ final readonly class FindResponse
     private function __construct(public array $channels) {}
 
     /**
+     * Create a new response from the given attributes.
+     *
      * @param  list<array{cid: string, channel_name: string}>  $attributes
      */
     public static function from(array $attributes): self

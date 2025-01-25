@@ -7,6 +7,9 @@ namespace TeamSpeak\WebQuery\ValueObjects\Transporter;
 use TeamSpeak\WebQuery\Enums\Transporter\ContentType;
 use TeamSpeak\WebQuery\ValueObjects\ApiKey;
 
+/**
+ * @internal
+ */
 final readonly class Headers
 {
     /**
@@ -14,11 +17,17 @@ final readonly class Headers
      */
     public function __construct(private array $headers) {}
 
+    /**
+     * Create a new empty instance of headers.
+     */
     public static function create(): self
     {
         return new self([]);
     }
 
+    /**
+     * Create a new instance of headers with the specified X-Api-Key.
+     */
     public static function withXApiKey(ApiKey $apiKey): self
     {
         return new self([
@@ -26,6 +35,9 @@ final readonly class Headers
         ]);
     }
 
+    /**
+     * Get a copy instance of headers with the specified Content-Type.
+     */
     public function withContentType(ContentType $contentType): self
     {
         return new self([
@@ -34,6 +46,9 @@ final readonly class Headers
         ]);
     }
 
+    /**
+     * Get a copy instance of headers with the specified header.
+     */
     public function withCustomHeader(string $name, string $value): self
     {
         return new self([
@@ -43,6 +58,8 @@ final readonly class Headers
     }
 
     /**
+     * Get the headers as associative array.
+     *
      * @return array<string, string>
      */
     public function toArray(): array

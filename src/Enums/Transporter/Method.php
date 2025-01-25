@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace TeamSpeak\WebQuery\Enums\Transporter;
 
+/**
+ * @internal
+ */
 enum Method: string
 {
     case GET = 'GET';

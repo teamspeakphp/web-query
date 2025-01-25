@@ -18,6 +18,9 @@ use TeamSpeak\WebQuery\ValueObjects\Transporter\Payload;
 use TeamSpeak\WebQuery\ValueObjects\Transporter\Response;
 use TeamSpeak\WebQuery\ValueObjects\Transporter\Status;
 
+/**
+ * @internal
+ */
 final readonly class HttpTransporter implements TransporterContract
 {
     public function __construct(
@@ -27,6 +30,8 @@ final readonly class HttpTransporter implements TransporterContract
     ) {}
 
     /**
+     * Make a request from the given payload.
+     *
      * @return Response<list<array<string, string>>|array{}>
      *
      * @throws JsonException

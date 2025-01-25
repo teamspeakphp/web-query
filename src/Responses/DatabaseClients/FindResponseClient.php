@@ -9,6 +9,8 @@ final readonly class FindResponseClient
     private function __construct(public int $databaseId) {}
 
     /**
+     * Create a new client from the given attributes.
+     *
      * @param  array{cldbid: string}  $attributes
      */
     public static function from(array $attributes): self

@@ -12,6 +12,8 @@ final readonly class FindResponseChannel
     ) {}
 
     /**
+     * Create a new channel from the given attributes.
+     *
      * @param  array{cid: string, channel_name: string}  $attributes
      */
     public static function from(array $attributes): self

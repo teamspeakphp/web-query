@@ -26,6 +26,8 @@ final readonly class InfoResponse
     ) {}
 
     /**
+     * Create a new response from the given attributes.
+     *
      * @param  array{0: array{client_base64HashClientUID: string, client_created: string, client_database_id: string, client_description: string, client_flag_avatar: string, client_lastconnected: string, client_lastip: string, client_month_bytes_downloaded: string, client_month_bytes_uploaded: string, client_nickname: string, client_total_bytes_downloaded: string, client_total_bytes_uploaded: string, client_totalconnections: string, client_unique_identifier: string}}  $attributes
      */
     public static function from(array $attributes): self

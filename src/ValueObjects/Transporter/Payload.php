@@ -13,6 +13,9 @@ use TeamSpeak\WebQuery\Enums\Transporter\ContentType;
 use TeamSpeak\WebQuery\Enums\Transporter\Method;
 use TeamSpeak\WebQuery\Exceptions\InvalidParameter;
 
+/**
+ * @internal
+ */
 final readonly class Payload
 {
     /**
@@ -26,6 +29,8 @@ final readonly class Payload
     ) {}
 
     /**
+     * Create a request from the payload.
+     *
      * @throws JsonException
      * @throws InvalidParameter
      */

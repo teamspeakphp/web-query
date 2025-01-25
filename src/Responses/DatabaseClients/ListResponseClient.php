@@ -21,6 +21,8 @@ final readonly class ListResponseClient
     ) {}
 
     /**
+     * Create a new client from the given attributes.
+     *
      * @param  array{cldbid: string, client_created: string, client_description: string, client_lastconnected: string, client_lastip: string, client_login_name: string, client_nickname: string, client_totalconnections: string, client_unique_identifier: string}  $attributes
      */
     public static function from(array $attributes): self

@@ -7,6 +7,9 @@ use TeamSpeak\WebQuery\Factory;
 
 final class TeamSpeak
 {
+    /**
+     * Create a new client with the specified configuration.
+     */
     public static function client(string $baseUri, string $apiKey, int $virtualServer): Client
     {
         return self::factory()
@@ -16,6 +19,9 @@ final class TeamSpeak
             ->make();
     }
 
+    /**
+     * Create a new factory.
+     */
     public static function factory(): Factory
     {
         return new Factory;

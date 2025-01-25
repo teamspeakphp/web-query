@@ -15,6 +15,9 @@ final class DatabaseClients implements DatabaseClientsContract
 {
     use Concerns\Transportable;
 
+    /**
+     * Displays a list of client identities known by the server including their database ID, last nickname, etc.
+     */
     public function list(?int $offset = null, ?int $limit = null, bool $count = false): ListResponse
     {
         $payload = new Payload(
@@ -29,6 +32,9 @@ final class DatabaseClients implements DatabaseClientsContract
         return ListResponse::from($response->body());
     }
 
+    /**
+     * Displays detailed database information about a client including unique ID, creation date, etc.
+     */
     public function info(int $databaseId): InfoResponse
     {
         $payload = new Payload(
@@ -42,6 +48,13 @@ final class DatabaseClients implements DatabaseClientsContract
         return InfoResponse::from($response->body());
     }
 
+    /**
+     * Displays a list of client database IDs matching a given pattern.
+     *
+     * You can either search for a clients last known nickname, or his unique
+     * identity by using the **$uid** option. The pattern parameter can include
+     * regular characters and SQL wildcard characters (e.g., %).
+     */
     public function find(string $pattern, bool $uid = false): FindResponse
     {
         $payload = new Payload(
@@ -56,17 +69,33 @@ final class DatabaseClients implements DatabaseClientsContract
         return FindResponse::from($response->body());
     }
 
+    /**
+     * Displays a list of client database IDs matching a given name pattern.
+     *
+     * The pattern parameter can include regular characters and SQL wildcard
+     * characters (e.g., %).
+     */
     public function findByName(string $pattern): FindResponse
     {
         return $this->find($pattern);
     }
 
+    /**
+     * Displays a list of client database IDs matching a given unique ID pattern.
+     *
+     * The pattern parameter can include regular characters and SQL wildcard
+     * characters (e.g., %).
+     */
     public function findByUid(string $pattern): FindResponse
     {
         return $this->find($pattern, true);
     }
 
     /**
+     * Changes a clients settings using given properties.
+     *
+     * For detailed information, see {@see \TeamSpeak\WebQuery\Enums\ClientProperties}.
+     *
      * @param  array<string, string>  $properties
      */
     public function edit(int $databaseId, array $properties): void
@@ -79,11 +108,17 @@ final class DatabaseClients implements DatabaseClientsContract
         $this->transporter->request($payload);
     }
 
+    /**
+     * Changes a client description.
+     */
     public function editDescription(int $databaseId, string $description): void
     {
         $this->edit($databaseId, ['client_description' => $description]);
     }
 
+    /**
+     * Deletes a clients properties from the database.
+     */
     public function delete(int $databaseId): void
     {
         $payload = new Payload(

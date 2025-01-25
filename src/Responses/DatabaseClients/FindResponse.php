@@ -12,6 +12,8 @@ final readonly class FindResponse
     private function __construct(public array $clients) {}
 
     /**
+     * Create a new response from the given attributes.
+     *
      * @param  list<array{cldbid: string}>  $attributes
      */
     public static function from(array $attributes): self

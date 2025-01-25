@@ -7,7 +7,7 @@ use TeamSpeak\WebQuery\Resources\ChannelGroups;
 use TeamSpeak\WebQuery\Resources\ChannelPermissions;
 use TeamSpeak\WebQuery\Resources\Channels;
 use TeamSpeak\WebQuery\Resources\Clients;
-use TeamSpeak\WebQuery\Resources\Complains;
+use TeamSpeak\WebQuery\Resources\Complaints;
 use TeamSpeak\WebQuery\Resources\CustomProperties;
 use TeamSpeak\WebQuery\Resources\DatabaseClients;
 use TeamSpeak\WebQuery\Resources\Logs;
@@ -42,8 +42,8 @@ it('has clients', function () {
     expect($this->client->clients())->toBeInstanceOf(Clients::class);
 });
 
-it('has complains', function () {
-    expect($this->client->complains())->toBeInstanceOf(Complains::class);
+it('has complaints', function () {
+    expect($this->client->complaints())->toBeInstanceOf(Complaints::class);
 });
 
 it('has custom properties', function () {

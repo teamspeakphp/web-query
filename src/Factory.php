@@ -29,6 +29,9 @@ final class Factory
      */
     private array $headers = [];
 
+    /**
+     * Set the base URI.
+     */
     public function withBaseUri(string $baseUri): self
     {
         $this->baseUri = $baseUri;
@@ -36,6 +39,9 @@ final class Factory
         return $this;
     }
 
+    /**
+     * Set the API key.
+     */
     public function withApiKey(string $apiKey): self
     {
         $this->apiKey = mb_trim($apiKey);
@@ -43,6 +49,9 @@ final class Factory
         return $this;
     }
 
+    /**
+     * Set the ID of the virtual server.
+     */
     public function withVirtualServer(?int $virtualServer): self
     {
         $this->virtualServer = $virtualServer;
@@ -50,6 +59,9 @@ final class Factory
         return $this;
     }
 
+    /**
+     * Set the port of the virtual server.
+     */
     public function withPort(?int $port): self
     {
         $this->port = $port;
@@ -57,6 +69,9 @@ final class Factory
         return $this;
     }
 
+    /**
+     * Set the HTTP client.
+     */
     public function withHttpClient(ClientInterface $client): self
     {
         $this->httpClient = $client;
@@ -64,6 +79,9 @@ final class Factory
         return $this;
     }
 
+    /**
+     * Add the HTTP header.
+     */
     public function withHttpHeader(string $name, string $value): self
     {
         $this->headers[$name] = $value;
@@ -72,6 +90,8 @@ final class Factory
     }
 
     /**
+     * Create a new configured instance of the client.
+     *
      * @throws InvalidConfiguration
      */
     public function make(): Client

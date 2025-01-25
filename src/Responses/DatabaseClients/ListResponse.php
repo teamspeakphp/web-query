@@ -15,6 +15,8 @@ final readonly class ListResponse
     ) {}
 
     /**
+     * Create a new response from the given attributes.
+     *
      * @param  list<array{cldbid: string, client_created: string, client_description: string, client_lastconnected: string, client_lastip: string, client_login_name: string, client_nickname: string, client_totalconnections: string, client_unique_identifier: string, count?: string}>  $attributes
      */
     public static function from(array $attributes): self

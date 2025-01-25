@@ -21,18 +21,24 @@ final class ErrorException extends Exception
         parent::__construct($message);
     }
 
+    /**
+     * Get the HTTP status code.
+     */
     public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
+    /**
+     * Get the error message.
+     */
     public function getErrorMessage(): string
     {
         return $this->getMessage();
     }
 
     /**
-     * Returns the error code.
+     * Get the error code.
      */
     public function getErrorCode(): int
     {

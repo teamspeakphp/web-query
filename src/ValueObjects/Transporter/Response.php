@@ -17,6 +17,8 @@ final readonly class Response
     private function __construct(private array $body) {}
 
     /**
+     * Create a response from the associative array.
+     *
      * @param  TBody  $body
      * @return Response<TBody>
      */
@@ -26,6 +28,8 @@ final readonly class Response
     }
 
     /**
+     * Get the response body.
+     *
      * @return TBody
      */
     public function body(): array
