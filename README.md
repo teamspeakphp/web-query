@@ -1,7 +1,7 @@
 # PHP TeamSpeak 3 WebQuery client
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/teamspeakphp/web-query.svg?style=flat-square)](https://packagist.org/packages/teamspeakphp/web-query)
-[![Tests](https://img.shields.io/github/actions/workflow/status/teamspeakphp/web-query/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/teamspeakphp/web-query/actions/workflows/run-tests.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/teamspeakphp/web-query/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/teamspeakphp/web-query/actions/workflows/tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/teamspeakphp/web-query.svg?style=flat-square)](https://packagist.org/packages/teamspeakphp/web-query)
 
 PHP TeamSpeak 3 WebQuery client.
