@@ -464,23 +464,33 @@ Not implemented.
 
 ## banclient
 
-Not implemented.
+```php
+$teamspeak->bans()->client();
+```
 
 ## banlist
 
-Not implemented.
+```php
+$teamspeak->bans()->list();
+```
 
 ## banadd
 
-Not implemented.
+```php
+$teamspeak->bans()->add();
+```
 
 ## bandel
 
-Not implemented.
+```php
+$teamspeak->bans()->delete();
+```
 
 ## bandelall
 
-Not implemented.
+```php
+$teamspeak->bans()->deleteAll();
+```
 
 ## customsearch
 
