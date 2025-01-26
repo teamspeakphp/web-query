@@ -40,14 +40,14 @@ test('send', function () {
                 ->json()
                 ->toBe([
                     'targetmode' => '1',
-                    'target' => 'bar',
+                    'target' => '1',
                     'msg' => 'foo',
                 ]);
 
             return true;
         })->andReturn($response);
 
-    $resource->send(TextMessageTargetMode::Client, 'foo', 'bar');
+    $resource->send(TextMessageTargetMode::Client, 'foo', 1);
 });
 
 test('send to client', function () {
@@ -65,14 +65,14 @@ test('send to client', function () {
                 ->json()
                 ->toBe([
                     'targetmode' => '1',
-                    'target' => 'bar',
+                    'target' => '1',
                     'msg' => 'foo',
                 ]);
 
             return true;
         })->andReturn($response);
 
-    $resource->sendToClient('foo', 'bar');
+    $resource->sendToClient('foo', 1);
 });
 
 test('send to channel', function () {
