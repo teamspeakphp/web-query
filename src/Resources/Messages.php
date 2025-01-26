@@ -19,26 +19,26 @@ final class Messages implements MessagesContract
     /**
      * Sends a text message to a specified target.
      *
-     * If mode **client**, a message will be sent to the client with the specified ID.
-     * If mode **channel** or **server**, the unique identifier will be ignored,
+     * If mode is **client**, a message will be sent to the client with the specified ID.
+     * If mode is **channel** or **server**, the ID will be ignored,
      * and a message will be sent to the current channel or server respectively.
      */
-    public function send(TextMessageTargetMode $mode, string $message, ?string $uniqueIdentifier = null): void
+    public function send(TextMessageTargetMode $mode, string $message, ?int $id = null): void
     {
         $payload = new Payload(
             command: Command::SendTextMessage,
-            parameters: ['targetmode' => $mode->value, 'target' => $uniqueIdentifier, 'msg' => $message],
+            parameters: ['targetmode' => $mode->value, 'target' => $id, 'msg' => $message],
         );
 
         $this->transporter->request($payload);
     }
 
     /**
-     * Sends a private text message to a client with specified the unique identifier.
+     * Sends a private text message to the client with the specified ID.
      */
-    public function sendToClient(string $message, string $uniqueIdentifier): void
+    public function sendToClient(string $message, int $id): void
     {
-        $this->send(TextMessageTargetMode::Client, $message, $uniqueIdentifier);
+        $this->send(TextMessageTargetMode::Client, $message, $id);
     }
 
     /**
