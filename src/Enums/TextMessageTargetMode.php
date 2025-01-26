@@ -9,15 +9,15 @@ enum TextMessageTargetMode: int
     /**
      * Target a client.
      */
-    case Client = 0;
+    case Client = 1;
 
     /**
      * Target a channel.
      */
-    case Channel = 1;
+    case Channel = 2;
 
     /**
      * Target a virtual server.
      */
-    case Server = 2;
+    case Server = 3;
 }
