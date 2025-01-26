@@ -9,20 +9,20 @@ enum LogLevel: int
     /**
      * Everything that terrible.
      */
-    case Error = 0;
+    case Error = 1;
 
     /**
      * Everything that might bad.
      */
-    case Warning = 1;
+    case Warning = 2;
 
     /**
      * Output that might help find a problem.
      */
-    case Debug = 2;
+    case Debug = 3;
 
     /**
      * Informational output.
      */
-    case Info = 3;
+    case Info = 4;
 }
