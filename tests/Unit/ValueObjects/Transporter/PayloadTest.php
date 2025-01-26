@@ -35,6 +35,7 @@ it('converts arguments', function () {
     $payload = new Payload(Command::Version, [
         'foo' => 'bar',
         'check' => true,
+        'uncheck' => false,
         'array' => [1, 2, 3],
         'null' => null,
     ], [
@@ -51,6 +52,7 @@ it('converts arguments', function () {
     expect($arguments)->toBe([
         'foo' => 'bar',
         'check' => '1',
+        'uncheck' => '0',
         'array' => [1, 2, 3],
         '-enabled' => '',
     ])->and($arguments)->not()->toHaveKeys([

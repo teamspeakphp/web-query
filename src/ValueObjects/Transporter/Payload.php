@@ -55,6 +55,10 @@ final readonly class Payload
                 throw new InvalidParameter(sprintf('Not scalar value for parameter "%s": %s', $key, gettype($value)));
             }
 
+            if (is_bool($value)) {
+                $value = $value ? '1' : '0';
+            }
+
             $arguments[$key] = (string) $value;
         }
 
