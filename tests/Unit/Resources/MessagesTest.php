@@ -39,7 +39,7 @@ test('send', function () {
             expect($request->getBody()->getContents())->toBeJson()
                 ->json()
                 ->toBe([
-                    'targetmode' => '0',
+                    'targetmode' => '1',
                     'target' => 'bar',
                     'msg' => 'foo',
                 ]);
@@ -64,7 +64,7 @@ test('send to client', function () {
             expect($request->getBody()->getContents())->toBeJson()
                 ->json()
                 ->toBe([
-                    'targetmode' => '0',
+                    'targetmode' => '1',
                     'target' => 'bar',
                     'msg' => 'foo',
                 ]);
@@ -89,7 +89,7 @@ test('send to channel', function () {
             expect($request->getBody()->getContents())->toBeJson()
                 ->json()
                 ->toBe([
-                    'targetmode' => '1',
+                    'targetmode' => '2',
                     'msg' => 'foo',
                 ]);
 
@@ -113,7 +113,7 @@ test('send to server', function () {
             expect($request->getBody()->getContents())->toBeJson()
                 ->json()
                 ->toBe([
-                    'targetmode' => '2',
+                    'targetmode' => '3',
                     'msg' => 'foo',
                 ]);
 
