@@ -6,6 +6,7 @@ namespace TeamSpeak\WebQuery\Resources;
 
 use TeamSpeak\WebQuery\Contracts\Resources\DatabaseClientsContract;
 use TeamSpeak\WebQuery\Enums\Query\Command;
+use TeamSpeak\WebQuery\Exceptions\NotFoundException;
 use TeamSpeak\WebQuery\Responses\DatabaseClients\FindResponse;
 use TeamSpeak\WebQuery\Responses\DatabaseClients\InfoResponse;
 use TeamSpeak\WebQuery\Responses\DatabaseClients\ListResponse;
@@ -42,8 +43,12 @@ final class DatabaseClients implements DatabaseClientsContract
             parameters: ['cldbid' => $databaseId],
         );
 
-        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{client_base64HashClientUID: string, client_created: string, client_database_id: string, client_description: string, client_flag_avatar: string, client_lastconnected: string, client_lastip: string, client_month_bytes_downloaded: string, client_month_bytes_uploaded: string, client_nickname: string, client_total_bytes_downloaded: string, client_total_bytes_uploaded: string, client_totalconnections: string, client_unique_identifier: string}}> $response */
+        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{client_base64HashClientUID: string, client_created: string, client_database_id: string, client_description: string, client_flag_avatar: string, client_lastconnected: string, client_lastip: string, client_month_bytes_downloaded: string, client_month_bytes_uploaded: string, client_nickname: string, client_total_bytes_downloaded: string, client_total_bytes_uploaded: string, client_totalconnections: string, client_unique_identifier: string}}|array{}> $response */
         $response = $this->transporter->request($payload);
+
+        if ($response->body() === []) {
+            throw new NotFoundException('Database client not found.');
+        }
 
         return InfoResponse::from($response->body());
     }

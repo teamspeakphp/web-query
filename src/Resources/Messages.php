@@ -7,6 +7,7 @@ namespace TeamSpeak\WebQuery\Resources;
 use TeamSpeak\WebQuery\Contracts\Resources\MessagesContract;
 use TeamSpeak\WebQuery\Enums\Query\Command;
 use TeamSpeak\WebQuery\Enums\TextMessageTargetMode;
+use TeamSpeak\WebQuery\Exceptions\NotFoundException;
 use TeamSpeak\WebQuery\Responses\Messages\GetResponse;
 use TeamSpeak\WebQuery\Responses\Messages\ListResponse;
 use TeamSpeak\WebQuery\ValueObjects\Transporter\Payload;
@@ -122,8 +123,12 @@ final class Messages implements MessagesContract
             parameters: ['msgid' => $id],
         );
 
-        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{msgid: string, cluid: string, subject: string, message: string}}> $response */
+        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{msgid: string, cluid: string, subject: string, message: string}}|array{}> $response */
         $response = $this->transporter->request($payload);
+
+        if ($response->body() === []) {
+            throw new NotFoundException('Offline message not found.');
+        }
 
         return GetResponse::from($response->body());
     }

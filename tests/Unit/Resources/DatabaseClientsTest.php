@@ -5,6 +5,7 @@ declare(strict_types=1);
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Client\ClientInterface;
+use TeamSpeak\WebQuery\Exceptions\NotFoundException;
 use TeamSpeak\WebQuery\Resources\DatabaseClients;
 use TeamSpeak\WebQuery\Transporters\HttpTransporter;
 use TeamSpeak\WebQuery\ValueObjects\ApiKey;
@@ -98,6 +99,24 @@ test('info', function () {
 
     $resource->info(1);
 });
+
+test('info with database empty result set', function () {
+    $resource = new DatabaseClients($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => [
+            'code' => 1281,
+            'message' => 'database empty result set',
+        ],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->andReturn($response);
+
+    $resource->info(1);
+})->throws(NotFoundException::class);
 
 test('find', function () {
     $resource = new DatabaseClients($this->http);

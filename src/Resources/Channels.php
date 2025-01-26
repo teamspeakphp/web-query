@@ -6,6 +6,7 @@ namespace TeamSpeak\WebQuery\Resources;
 
 use TeamSpeak\WebQuery\Contracts\Resources\ChannelsContract;
 use TeamSpeak\WebQuery\Enums\Query\Command;
+use TeamSpeak\WebQuery\Exceptions\NotFoundException;
 use TeamSpeak\WebQuery\Responses\Channels\CreateResponse;
 use TeamSpeak\WebQuery\Responses\Channels\FindResponse;
 use TeamSpeak\WebQuery\Responses\Channels\InfoResponse;
@@ -52,8 +53,12 @@ final class Channels implements ChannelsContract
             parameters: ['cid' => $id],
         );
 
-        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{channel_banner_gfx_url: string, channel_banner_mode: string, channel_codec: string, channel_codec_is_unencrypted: string, channel_codec_latency_factor: string, channel_codec_quality: string, channel_delete_delay: string, channel_description: string, channel_filepath: string, channel_flag_default: string, channel_flag_maxclients_unlimited: string, channel_flag_maxfamilyclients_inherited: string, channel_flag_maxfamilyclients_unlimited: string, channel_flag_password: string, channel_flag_permanent: string, channel_flag_semi_permanent: string, channel_forced_silence: string, channel_icon_id: string, channel_maxclients: string, channel_maxfamilyclients: string, channel_name: string, channel_name_phonetic: string, channel_needed_talk_power: string, channel_order: string, channel_password: string, channel_security_salt: string, channel_topic: string, channel_unique_identifier: string, pid: string, seconds_empty: string}}> $response */
+        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{channel_banner_gfx_url: string, channel_banner_mode: string, channel_codec: string, channel_codec_is_unencrypted: string, channel_codec_latency_factor: string, channel_codec_quality: string, channel_delete_delay: string, channel_description: string, channel_filepath: string, channel_flag_default: string, channel_flag_maxclients_unlimited: string, channel_flag_maxfamilyclients_inherited: string, channel_flag_maxfamilyclients_unlimited: string, channel_flag_password: string, channel_flag_permanent: string, channel_flag_semi_permanent: string, channel_forced_silence: string, channel_icon_id: string, channel_maxclients: string, channel_maxfamilyclients: string, channel_name: string, channel_name_phonetic: string, channel_needed_talk_power: string, channel_order: string, channel_password: string, channel_security_salt: string, channel_topic: string, channel_unique_identifier: string, pid: string, seconds_empty: string}}|array{}> $response */
         $response = $this->transporter->request($payload);
+
+        if ($response->body() === []) {
+            throw new NotFoundException('Channel not found.');
+        }
 
         return InfoResponse::from($response->body());
     }

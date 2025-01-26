@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Client\ClientInterface;
 use TeamSpeak\WebQuery\Enums\TextMessageTargetMode;
+use TeamSpeak\WebQuery\Exceptions\NotFoundException;
 use TeamSpeak\WebQuery\Resources\Messages;
 use TeamSpeak\WebQuery\Transporters\HttpTransporter;
 use TeamSpeak\WebQuery\ValueObjects\ApiKey;
@@ -245,6 +246,24 @@ test('get inbox', function () {
 
     expect($resource->getInbox(1))->id->toBe(1);
 });
+
+test('get inbox with database empty result set', function () {
+    $resource = new Messages($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => [
+            'code' => 1281,
+            'message' => 'database empty result set',
+        ],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->andReturn($response);
+
+    $resource->getInbox(1);
+})->throws(NotFoundException::class);
 
 test('update flag inbox', function () {
     $resource = new Messages($this->http);
