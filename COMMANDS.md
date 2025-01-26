@@ -147,7 +147,13 @@ Not implemented.
 
 ## sendtextmessage
 
-Not implemented.
+```php
+$teamspeak->messages()->send();
+// also available few shortcuts:
+$teamspeak->messages()->sendToClient();
+$teamspeak->messages()->sendToChannel();
+$teamspeak->messages()->sendToServer();
+```
 
 ## logview
 
@@ -159,7 +165,9 @@ Not implemented.
 
 ## gm
 
-Not implemented.
+```php
+$teamspeak->messages()->broadcast();
+```
 
 ## channellist
 
@@ -428,23 +436,36 @@ Not implemented.
 
 ## messagelist
 
-Not implemented.
+```php
+$teamspeak->messages()->listInbox();
+```
 
 ## messageadd
 
-Not implemented.
+```php
+$teamspeak->messages()->sendInbox();
+```
 
 ## messagedel
 
-Not implemented.
+```php
+$teamspeak->messages()->deleteInbox();
+```
 
 ## messageget
 
-Not implemented.
+```php
+$teamspeak->messages()->getInbox();
+```
 
 ## messageupdateflag
 
-Not implemented.
+```php
+$teamspeak->messages()->updateFlagInbox();
+// also available few shortcuts:
+$teamspeak->messages()->markAsReadInbox();
+$teamspeak->messages()->markAsUnreadInbox();
+```
 
 ## complainlist
 
