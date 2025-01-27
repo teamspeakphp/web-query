@@ -281,19 +281,29 @@ Not implemented.
 
 ## clientlist
 
-Not implemented.
+```php
+$teamspeak->clients()->list();
+```
 
 ## clientinfo
 
-Not implemented.
+```php
+$teamspeak->clients()->info();
+```
 
 ## clientfind
 
-Not implemented.
+```php
+$teamspeak->clients()->find();
+```
 
 ## clientedit
 
-Not implemented.
+```php
+$teamspeak->clients()->edit();
+// also available a shortcut:
+$teamspeak->clients()->editDescription();
+```
 
 ## clientdblist
 
@@ -332,55 +342,86 @@ $teamspeak->databaseClients()->delete();
 
 ## clientgetids
 
-Not implemented.
+```php
+$teamspeak->clients()->getIds();
+```
 
 ## clientgetdbidfromuid
 
-Not implemented.
+```php
+$teamspeak->clients()->getDbIdFromUid();
+```
 
 ## clientgetnamefromuid
 
-Not implemented.
+```php
+$teamspeak->clients()->getNameFromUid();
+```
 
 ## clientgetuidfromclid
 
-Not implemented.
+```php
+$teamspeak->clients()->getUid();
+```
 
 ## clientgetnamefromdbid
 
-Not implemented.
+```php
+$teamspeak->clients()->getNameFromDbId();
+```
 
 ## clientsetserverquerylogin
 
-Not implemented.
+```php
+$teamspeak->clients()->setServerQueryLogin();
+```
 
 ## clientupdate
 
-Not implemented.
+```php
+$teamspeak->clients()->update();
+// also available a shortcut:
+$teamspeak->clients()->updateNickname();
+```
 
 ## clientmove
 
-Not implemented.
+```php
+$teamspeak->clients()->move();
+```
 
 ## clientkick
 
-Not implemented.
+```php
+$teamspeak->clients()->kick();
+// also available few shortcuts:
+$teamspeak->clients()->kickFromChannel();
+$teamspeak->clients()->kickFromServer();
+```
 
 ## clientpoke
 
-Not implemented.
+```php
+$teamspeak->clients()->poke();
+```
 
 ## clientpermlist
 
-Not implemented.
+```php
+$teamspeak->clients()->getPermissions();
+```
 
 ## clientaddperm
 
-Not implemented.
+```php
+$teamspeak->clients()->addPermission();
+```
 
 ## clientdelperm
 
-Not implemented.
+```php
+$teamspeak->clients()->deletePermission();
+```
 
 ## channelclientpermlist
 
