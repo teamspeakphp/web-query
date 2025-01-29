@@ -83,51 +83,82 @@ Not implemented.
 
 ## servergrouplist
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->list();
+```
 
 ## servergroupadd
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->add();
+// also available few shortcuts:
+$teamspeak->serverGroups()->addTemplate();
+$teamspeak->serverGroups()->addRegular();
+$teamspeak->serverGroups()->addQuery();
+```
 
 ## servergroupdel
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->delete();
+```
 
 ## servergroupcopy
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->copy();
+// also available few shortcuts:
+$teamspeak->serverGroups()->clone();
+$teamspeak->serverGroups()->overwrite();
+```
 
 ## servergrouprename
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->rename();
+```
 
 ## servergrouppermlist
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->getPermissions();
+```
 
 ## servergroupaddperm
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->addPermission();
+```
 
 ## servergroupdelperm
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->deletePermission();
+```
 
 ## servergroupaddclient
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->addClient();
+```
 
 ## servergroupdelclient
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->deleteClient();
+```
 
 ## servergroupclientlist
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->getClients();
+```
 
 ## servergroupsbyclientid
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->getByClient();
+```
 
 ## servergroupautoaddperm
 
