@@ -240,7 +240,7 @@ final class ServerGroups implements ServerGroupsContract
             options: ['names' => $names],
         );
 
-        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<list<array{cldbid: string}>> $response */
+        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<list<array{cldbid: string, client_nickname?: string, client_unique_identifier?: string}>> $response */
         $response = $this->transporter->request($payload);
 
         return GetClientsResponse::from($response->body());

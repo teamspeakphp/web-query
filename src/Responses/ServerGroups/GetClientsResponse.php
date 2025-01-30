@@ -12,7 +12,7 @@ final readonly class GetClientsResponse
     private function __construct(public array $clients) {}
 
     /**
-     * @param  list<array{cldbid: string}>  $attributes
+     * @param  list<array{cldbid: string, client_nickname?: string, client_unique_identifier?: string}>  $attributes
      */
     public static function from(array $attributes): self
     {
