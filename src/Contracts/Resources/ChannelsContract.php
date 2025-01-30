@@ -46,7 +46,7 @@ interface ChannelsContract
      * that you are able to specify all settings of the new channel at once.
      * For detailed information, see {@see \TeamSpeak\WebQuery\Enums\ChannelProperties}.
      *
-     * @param  array<string, string|int|bool>|array{}  $properties
+     * @param  array<string, string|int|bool|null>|array{}  $properties
      */
     public function create(string $name, array $properties = []): CreateResponse;
 
@@ -66,7 +66,7 @@ interface ChannelsContract
      * you are able to change all settings of the channel specified with channel ID at once.
      * For detailed information, see {@see \TeamSpeak\WebQuery\Enums\ChannelProperties}.
      *
-     * @param  array<string, string|int|bool>  $properties
+     * @param  array<string, string|int|bool|null>  $properties
      */
     public function edit(int $id, array $properties): void;
 }
