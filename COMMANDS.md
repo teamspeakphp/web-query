@@ -598,27 +598,41 @@ $teamspeak->channelPermissions()->deleteForClient(channelId: 1, clientDatabaseId
 
 ## permissionlist
 
-Not implemented.
+```php
+$teamspeak->permissions()->list();
+```
 
 ## permidgetbyname
 
-Not implemented.
+```php
+$teamspeak->permissions()->getIdByName(name: 'b_serverinstance_help_view');
+```
 
 ## permoverview
 
-Not implemented.
+```php
+$teamspeak->permissions()->overview(channelId: 1, clientDatabaseId: 2);
+```
 
 ## permget
 
-Not implemented.
+```php
+$teamspeak->permissions()->get(id: 17835);
+$teamspeak->permissions()->get(id: 'b_serverinstance_help_view');
+```
 
 ## permfind
 
-Not implemented.
+```php
+$teamspeak->permissions()->find(id: 17835);
+$teamspeak->permissions()->find(id: 'b_serverinstance_help_view');
+```
 
 ## permreset
 
-Not implemented.
+```php
+$teamspeak->permissions()->reset();
+```
 
 ## privilegekeylist
 
