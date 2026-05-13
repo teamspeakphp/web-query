@@ -17,7 +17,7 @@ final readonly class GetPermissionsResponse
     public static function from(array $attributes): self
     {
         return new self(
-            array_map(static fn (array $result): GetPermissionsResponsePermission => GetPermissionsResponsePermission::from($result), $attributes),
+            array_map(GetPermissionsResponsePermission::from(...), $attributes),
         );
     }
 }

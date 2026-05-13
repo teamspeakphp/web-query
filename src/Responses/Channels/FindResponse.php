@@ -19,7 +19,7 @@ final readonly class FindResponse
     public static function from(array $attributes): self
     {
         return new self(
-            array_map(static fn (array $result): FindResponseChannel => FindResponseChannel::from($result), $attributes)
+            array_map(FindResponseChannel::from(...), $attributes)
         );
     }
 }

@@ -22,7 +22,7 @@ final readonly class ListResponse
     public static function from(array $attributes): self
     {
         return new self(
-            array_map(static fn (array $attributes): ListResponseClient => ListResponseClient::from($attributes), $attributes),
+            array_map(ListResponseClient::from(...), $attributes),
             isset($attributes[0]['count']) ? (int) $attributes[0]['count'] : null,
         );
     }

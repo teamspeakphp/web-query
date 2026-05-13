@@ -19,7 +19,7 @@ final readonly class ListResponse
     public static function from(array $attributes): self
     {
         return new self(
-            array_map(static fn (array $result): ListResponseChannel => ListResponseChannel::from($result), $attributes)
+            array_map(ListResponseChannel::from(...), $attributes)
         );
     }
 }

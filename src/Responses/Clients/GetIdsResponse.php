@@ -17,7 +17,7 @@ final readonly class GetIdsResponse
     public static function from(array $attributes): self
     {
         return new self(
-            array_map(static fn (array $result): GetIdsResponseClient => GetIdsResponseClient::from($result), $attributes)
+            array_map(GetIdsResponseClient::from(...), $attributes)
         );
     }
 }

@@ -17,7 +17,7 @@ final readonly class GetByClientResponse
     public static function from(array $attributes): self
     {
         return new self(
-            array_map(static fn (array $result): GetByClientResponseGroup => GetByClientResponseGroup::from($result), $attributes),
+            array_map(GetByClientResponseGroup::from(...), $attributes),
         );
     }
 }

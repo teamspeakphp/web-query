@@ -64,7 +64,7 @@ final readonly class Payload
 
         foreach ($this->options as $flagName => $flagValue) {
             if ($flagValue === true) {
-                $arguments["-$flagName"] = '';
+                $arguments['-'.$flagName] = '';
             }
         }
 

@@ -19,7 +19,7 @@ final class CreateResponse
     public static function from(array $attributes): self
     {
         return new self(
-            array_map(static fn (array $result): CreateResponseBan => CreateResponseBan::from($result), $attributes)
+            array_map(CreateResponseBan::from(...), $attributes)
         );
     }
 }

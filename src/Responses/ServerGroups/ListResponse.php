@@ -17,7 +17,7 @@ final readonly class ListResponse
     public static function from(array $attributes): self
     {
         return new self(
-            array_map(static fn (array $result): ListResponseGroup => ListResponseGroup::from($result), $attributes),
+            array_map(ListResponseGroup::from(...), $attributes),
         );
     }
 }

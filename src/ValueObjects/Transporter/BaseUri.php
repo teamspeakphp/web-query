@@ -30,10 +30,10 @@ final readonly class BaseUri implements StringableContract
 
         foreach (['http://', 'https://'] as $protocol) {
             if (str_starts_with($baseUri, $protocol)) {
-                return "$baseUri/";
+                return $baseUri.'/';
             }
         }
 
-        return "https://$baseUri/";
+        return sprintf('https://%s/', $baseUri);
     }
 }
