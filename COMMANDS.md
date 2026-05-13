@@ -541,19 +541,29 @@ $teamspeak->messages()->markAsUnreadInbox();
 
 ## complainlist
 
-Not implemented.
+```php
+$teamspeak->complaints()->list();
+// filter by target client:
+$teamspeak->complaints()->list(targetClientDatabaseId: 5);
+```
 
 ## complainadd
 
-Not implemented.
+```php
+$teamspeak->complaints()->add(targetClientDatabaseId: 5, message: 'bad behavior');
+```
 
 ## complaindelall
 
-Not implemented.
+```php
+$teamspeak->complaints()->deleteAll(targetClientDatabaseId: 5);
+```
 
 ## complaindel
 
-Not implemented.
+```php
+$teamspeak->complaints()->delete(targetClientDatabaseId: 5, fromClientDatabaseId: 3);
+```
 
 ## banclient
 
