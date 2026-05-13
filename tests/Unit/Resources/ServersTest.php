@@ -526,3 +526,49 @@ test('edit', function () {
 
     $resource->edit(['virtualserver_name' => 'New Name']);
 })->doesNotPerformAssertions();
+
+test('create snapshot', function () {
+    $resource = new Servers($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'body' => [[
+            'hash' => 'abc123',
+            'virtualserver_snapshot' => 'base64encodedsnapshotdata==',
+        ]],
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBe('');
+
+            return true;
+        })->andReturn($response);
+
+    $result = $resource->createSnapshot();
+    expect($result->hash)->toBe('abc123')
+        ->and($result->data)->toBe('base64encodedsnapshotdata==');
+});
+
+test('deploy snapshot', function () {
+    $resource = new Servers($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['virtualserver_snapshot' => 'base64encodedsnapshotdata==']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->deploySnapshot('base64encodedsnapshotdata==');
+})->doesNotPerformAssertions();

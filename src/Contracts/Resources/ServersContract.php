@@ -7,6 +7,7 @@ namespace TeamSpeak\WebQuery\Contracts\Resources;
 use TeamSpeak\WebQuery\Responses\Servers\BindingListResponse;
 use TeamSpeak\WebQuery\Responses\Servers\ConnectionInfoResponse;
 use TeamSpeak\WebQuery\Responses\Servers\CreateResponse;
+use TeamSpeak\WebQuery\Responses\Servers\CreateSnapshotResponse;
 use TeamSpeak\WebQuery\Responses\Servers\HostInfoResponse;
 use TeamSpeak\WebQuery\Responses\Servers\IdGetByPortResponse;
 use TeamSpeak\WebQuery\Responses\Servers\InfoResponse;
@@ -114,4 +115,16 @@ interface ServersContract
      * @param  array<string, string|int|bool|null>  $properties
      */
     public function edit(array $properties): void;
+
+    /**
+     * Creates a snapshot of the selected virtual server.
+     *
+     * Returns the snapshot hash and data which can be used with deploySnapshot.
+     */
+    public function createSnapshot(): CreateSnapshotResponse;
+
+    /**
+     * Deploys a previously created virtual server snapshot.
+     */
+    public function deploySnapshot(string $snapshot): void;
 }
