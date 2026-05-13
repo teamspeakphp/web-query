@@ -9,6 +9,7 @@ use TeamSpeak\WebQuery\Enums\Query\Command;
 use TeamSpeak\WebQuery\Responses\Servers\BindingListResponse;
 use TeamSpeak\WebQuery\Responses\Servers\ConnectionInfoResponse;
 use TeamSpeak\WebQuery\Responses\Servers\CreateResponse;
+use TeamSpeak\WebQuery\Responses\Servers\CreateSnapshotResponse;
 use TeamSpeak\WebQuery\Responses\Servers\HostInfoResponse;
 use TeamSpeak\WebQuery\Responses\Servers\IdGetByPortResponse;
 use TeamSpeak\WebQuery\Responses\Servers\InfoResponse;
@@ -283,6 +284,34 @@ final class Servers implements ServersContract
         $payload = new Payload(
             command: Command::ServerEdit,
             parameters: $properties,
+        );
+
+        $this->transporter->request($payload);
+    }
+
+    /**
+     * Creates a snapshot of the selected virtual server.
+     *
+     * Returns the snapshot hash and data which can be used with deploySnapshot.
+     */
+    public function createSnapshot(): CreateSnapshotResponse
+    {
+        $payload = new Payload(Command::ServerSnapshotCreate);
+
+        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{hash: string, virtualserver_snapshot: string}}> $response */
+        $response = $this->transporter->request($payload);
+
+        return CreateSnapshotResponse::from($response->body());
+    }
+
+    /**
+     * Deploys a previously created virtual server snapshot.
+     */
+    public function deploySnapshot(string $snapshot): void
+    {
+        $payload = new Payload(
+            command: Command::ServerSnapshotDeploy,
+            parameters: ['virtualserver_snapshot' => $snapshot],
         );
 
         $this->transporter->request($payload);

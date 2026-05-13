@@ -223,11 +223,17 @@ Not implemented.
 
 ## serversnapshotcreate
 
-Not implemented.
+```php
+$snapshot = $teamspeak->servers()->createSnapshot();
+// $snapshot->hash — MD5 hash of the snapshot
+// $snapshot->data — snapshot data to pass to deploySnapshot
+```
 
 ## serversnapshotdeploy
 
-Not implemented.
+```php
+$teamspeak->servers()->deploySnapshot(snapshot: $snapshot->data);
+```
 
 ## sendtextmessage
 
