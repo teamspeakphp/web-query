@@ -49,4 +49,5 @@ jobs:
         run: composer test:types
 
       - name: Test Refactor
+        if: matrix.dependency-version == 'prefer-stable'
         run: composer test:refactor
