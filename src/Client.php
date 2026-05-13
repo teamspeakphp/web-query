@@ -6,6 +6,7 @@ namespace TeamSpeak\WebQuery;
 
 use TeamSpeak\WebQuery\Contracts\ClientContract;
 use TeamSpeak\WebQuery\Contracts\TransporterContract;
+use TeamSpeak\WebQuery\Enums\Query\Command;
 use TeamSpeak\WebQuery\Resources\Bans;
 use TeamSpeak\WebQuery\Resources\ChannelGroups;
 use TeamSpeak\WebQuery\Resources\ChannelPermissions;
@@ -21,6 +22,8 @@ use TeamSpeak\WebQuery\Resources\PrivilegeKeys;
 use TeamSpeak\WebQuery\Resources\ServerGroups;
 use TeamSpeak\WebQuery\Resources\Servers;
 use TeamSpeak\WebQuery\Resources\Tokens;
+use TeamSpeak\WebQuery\Responses\WhoAmI\WhoAmIResponse;
+use TeamSpeak\WebQuery\ValueObjects\Transporter\Payload;
 
 final readonly class Client implements ClientContract
 {
@@ -144,5 +147,18 @@ final readonly class Client implements ClientContract
     public function tokens(): Tokens
     {
         return new Tokens($this->transporter);
+    }
+
+    /**
+     * Returns information about the current query client session.
+     */
+    public function whoami(): WhoAmIResponse
+    {
+        $payload = new Payload(Command::WhoAmI);
+
+        /** @var ValueObjects\Transporter\Response<array{0: array{client_channel_id: string, client_database_id: string, client_id: string, client_login_name: string, client_nickname: string, client_origin_server_id: string, client_unique_identifier: string, virtualserver_id: string, virtualserver_port: string, virtualserver_status: string, virtualserver_unique_identifier: string}}> $response */
+        $response = $this->transporter->request($payload);
+
+        return WhoAmIResponse::from($response->body());
     }
 }

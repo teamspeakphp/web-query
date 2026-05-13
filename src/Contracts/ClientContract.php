@@ -19,6 +19,7 @@ use TeamSpeak\WebQuery\Contracts\Resources\PrivilegeKeysContract;
 use TeamSpeak\WebQuery\Contracts\Resources\ServerGroupsContract;
 use TeamSpeak\WebQuery\Contracts\Resources\ServersContract;
 use TeamSpeak\WebQuery\Contracts\Resources\TokensContract;
+use TeamSpeak\WebQuery\Responses\WhoAmI\WhoAmIResponse;
 
 interface ClientContract
 {
@@ -96,4 +97,9 @@ interface ClientContract
      * Interact with the tokens.
      */
     public function tokens(): TokensContract;
+
+    /**
+     * Returns information about the current query client session.
+     */
+    public function whoami(): WhoAmIResponse;
 }
