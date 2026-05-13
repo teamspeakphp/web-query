@@ -11,75 +11,121 @@ Due to differences in operation, the following ServerQuery commands are currentl
 
 ## version
 
-Not implemented.
+```php
+$teamspeak->servers()->version();
+```
 
 ## hostinfo
 
-Not implemented.
+```php
+$teamspeak->servers()->hostInfo();
+```
 
 ## instanceinfo
 
-Not implemented.
+```php
+$teamspeak->servers()->instanceInfo();
+```
 
 ## instanceedit
 
-Not implemented.
+```php
+$teamspeak->servers()->editInstance(properties: ['serverinstance_filetransfer_port' => 30033]);
+```
 
 ## bindinglist
 
-Not implemented.
+```php
+$teamspeak->servers()->bindingList();
+```
 
 ## serverlist
 
-Not implemented.
+```php
+$teamspeak->servers()->list();
+// with options:
+$teamspeak->servers()->list(uid: true, all: true);
+```
 
 ## serveridgetbyport
 
-Not implemented.
+```php
+$teamspeak->servers()->idGetByPort(port: 9987);
+```
 
 ## serverdelete
 
-Not implemented.
+```php
+$teamspeak->servers()->delete(id: 1);
+```
 
 ## servercreate
 
-Not implemented.
+```php
+$teamspeak->servers()->create(name: 'My Server');
+// with additional properties:
+$teamspeak->servers()->create(name: 'My Server', properties: ['virtualserver_maxclients' => 64]);
+```
 
 ## serverstart
 
-Not implemented.
+```php
+$teamspeak->servers()->start(id: 1);
+```
 
 ## serverstop
 
-Not implemented.
+```php
+$teamspeak->servers()->stop(id: 1);
+// with reason:
+$teamspeak->servers()->stop(id: 1, reasonMessage: 'Maintenance');
+```
 
 ## serverprocessstop
 
-Not implemented.
+```php
+$teamspeak->servers()->stopProcess();
+// with reason:
+$teamspeak->servers()->stopProcess(reasonMessage: 'Shutting down');
+```
 
 ## serverinfo
 
-Not implemented.
+```php
+$teamspeak->servers()->info();
+```
 
 ## serverrequestconnectioninfo
 
-Not implemented.
+```php
+$teamspeak->servers()->connectionInfo();
+```
 
 ## servertemppasswordadd
 
-Not implemented.
+```php
+$teamspeak->servers()->addTempPassword(password: 'secret', description: 'Guest pass', duration: 3600);
+// with target channel:
+$teamspeak->servers()->addTempPassword(password: 'secret', description: 'Guest pass', duration: 3600, channelId: 5, channelPassword: 'chanpw');
+```
 
 ## servertemppassworddel
 
-Not implemented.
+```php
+$teamspeak->servers()->deleteTempPassword(password: 'secret');
+```
 
 ## servertemppasswordlist
 
-Not implemented.
+```php
+$teamspeak->servers()->listTempPasswords();
+```
 
 ## serveredit
 
-Not implemented.
+```php
+$teamspeak->servers()->edit(properties: ['virtualserver_name' => 'New Name', 'virtualserver_maxclients' => 64]);
+```
 
 ## servergrouplist
 
