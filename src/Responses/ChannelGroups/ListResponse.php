@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace TeamSpeak\WebQuery\Responses\ChannelGroups;
+
+final readonly class ListResponse
+{
+    /**
+     * @param  list<ListResponseGroup>  $groups
+     */
+    private function __construct(public array $groups) {}
+
+    /**
+     * @param  list<array{iconid: string, n_member_addp: string, n_member_removep: string, n_modifyp: string, name: string, namemode: string, savedb: string, cgid: string, sortid: string, type: string}>  $attributes
+     */
+    public static function from(array $attributes): self
+    {
+        return new self(
+            array_map(ListResponseGroup::from(...), $attributes),
+        );
+    }
+}

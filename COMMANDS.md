@@ -252,43 +252,68 @@ $teamspeak->channels()->edit();
 
 ## channelgrouplist
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->list();
+```
 
 ## channelgroupadd
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->add(name: 'Channel Admin');
+```
 
 ## channelgroupdel
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->delete(id: 5, force: true);
+```
 
 ## channelgroupcopy
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->copy(id: 5, name: 'Channel Admin Copy'); // clone
+$teamspeak->channelGroups()->copy(id: 5, target: 6); // overwrite
+```
 
 ## channelgrouprename
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->rename(id: 5, name: 'New Name');
+```
 
 ## channelgroupaddperm
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->addPermission(channelGroupId: 5, id: 42, value: 75);
+$teamspeak->channelGroups()->addPermission(channelGroupId: 5, id: 'i_channel_needed_join_power', value: 75);
+```
 
 ## channelgrouppermlist
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->getPermissions(id: 5);
+$teamspeak->channelGroups()->getPermissions(id: 5, names: true);
+```
 
 ## channelgroupdelperm
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->deletePermission(channelGroupId: 5, id: 42);
+$teamspeak->channelGroups()->deletePermission(channelGroupId: 5, id: 'i_channel_needed_join_power');
+```
 
 ## channelgroupclientlist
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->getClients(id: 5);
+$teamspeak->channelGroups()->getClients(id: 5, channelId: 1, clientDatabaseId: 18);
+```
 
 ## setclientchannelgroup
 
-Not implemented.
+```php
+$teamspeak->channelGroups()->setClientChannelGroup(channelGroupId: 5, channelId: 1, clientDatabaseId: 18);
+```
 
 ## tokenadd
 
