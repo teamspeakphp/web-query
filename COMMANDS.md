@@ -188,11 +188,19 @@ $teamspeak->messages()->sendToServer();
 
 ## logview
 
-Not implemented.
+```php
+$teamspeak->logs()->list();
+// with options:
+$teamspeak->logs()->list(lines: 50, reverse: true, instance: true, beginPos: 100);
+```
 
 ## logadd
 
-Not implemented.
+```php
+use TeamSpeak\WebQuery\Enums\LogLevel;
+
+$teamspeak->logs()->add(LogLevel::Info, 'custom log message');
+```
 
 ## gm
 
