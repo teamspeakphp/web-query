@@ -349,15 +349,25 @@ Not implemented.
 
 ## channelpermlist
 
-Not implemented.
+```php
+$teamspeak->channelPermissions()->list(channelId: 1);
+// with permission names instead of IDs:
+$teamspeak->channelPermissions()->list(channelId: 1, names: true);
+```
 
 ## channeladdperm
 
-Not implemented.
+```php
+$teamspeak->channelPermissions()->add(channelId: 1, id: 42, value: 75);
+$teamspeak->channelPermissions()->add(channelId: 1, id: 'i_channel_needed_join_power', value: 75, negated: true, skip: true);
+```
 
 ## channeldelperm
 
-Not implemented.
+```php
+$teamspeak->channelPermissions()->delete(channelId: 1, id: 42);
+$teamspeak->channelPermissions()->delete(channelId: 1, id: 'i_channel_needed_join_power');
+```
 
 ## clientlist
 
@@ -520,15 +530,25 @@ $teamspeak->clients()->deletePermission(databaseId: 18, id: 'i_client_talk_power
 
 ## channelclientpermlist
 
-Not implemented.
+```php
+$teamspeak->channelPermissions()->listForClient(channelId: 1, clientDatabaseId: 18);
+// with permission names instead of IDs:
+$teamspeak->channelPermissions()->listForClient(channelId: 1, clientDatabaseId: 18, names: true);
+```
 
 ## channelclientaddperm
 
-Not implemented.
+```php
+$teamspeak->channelPermissions()->addForClient(channelId: 1, clientDatabaseId: 18, id: 42, value: 75);
+$teamspeak->channelPermissions()->addForClient(channelId: 1, clientDatabaseId: 18, id: 'i_channel_needed_join_power', value: 75, negated: true);
+```
 
 ## channelclientdelperm
 
-Not implemented.
+```php
+$teamspeak->channelPermissions()->deleteForClient(channelId: 1, clientDatabaseId: 18, id: 42);
+$teamspeak->channelPermissions()->deleteForClient(channelId: 1, clientDatabaseId: 18, id: 'i_channel_needed_join_power');
+```
 
 ## permissionlist
 
