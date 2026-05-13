@@ -90,74 +90,81 @@ $teamspeak->serverGroups()->list();
 ## servergroupadd
 
 ```php
-$teamspeak->serverGroups()->add();
+$teamspeak->serverGroups()->add(name: 'Moderators');
 // also available few shortcuts:
-$teamspeak->serverGroups()->addTemplate();
-$teamspeak->serverGroups()->addRegular();
-$teamspeak->serverGroups()->addQuery();
+$teamspeak->serverGroups()->addTemplate(name: 'Moderators');
+$teamspeak->serverGroups()->addRegular(name: 'Moderators');
+$teamspeak->serverGroups()->addQuery(name: 'Moderators');
 ```
 
 ## servergroupdel
 
 ```php
-$teamspeak->serverGroups()->delete();
+$teamspeak->serverGroups()->delete(id: 5);
+$teamspeak->serverGroups()->delete(id: 5, force: true);
 ```
 
 ## servergroupcopy
 
 ```php
-$teamspeak->serverGroups()->copy();
+$teamspeak->serverGroups()->copy(id: 5, name: 'Moderators Copy'); // clone
+$teamspeak->serverGroups()->copy(id: 5, target: 6); // overwrite
 // also available few shortcuts:
-$teamspeak->serverGroups()->clone();
-$teamspeak->serverGroups()->overwrite();
+$teamspeak->serverGroups()->clone(id: 5, name: 'Moderators Copy');
+$teamspeak->serverGroups()->overwrite(from: 5, to: 6);
 ```
 
 ## servergrouprename
 
 ```php
-$teamspeak->serverGroups()->rename();
+$teamspeak->serverGroups()->rename(id: 5, name: 'New Name');
 ```
 
 ## servergrouppermlist
 
 ```php
-$teamspeak->serverGroups()->getPermissions();
+$teamspeak->serverGroups()->getPermissions(id: 5);
+$teamspeak->serverGroups()->getPermissions(id: 5, names: true);
 ```
 
 ## servergroupaddperm
 
 ```php
-$teamspeak->serverGroups()->addPermission();
+$teamspeak->serverGroups()->addPermission(serverGroupId: 5, id: 42, value: 75);
+$teamspeak->serverGroups()->addPermission(serverGroupId: 5, id: 'i_group_needed_modify_power', value: 75);
+$teamspeak->serverGroups()->addPermission(serverGroupId: 5, id: 42, value: 75, skip: true);
 ```
 
 ## servergroupdelperm
 
 ```php
-$teamspeak->serverGroups()->deletePermission();
+$teamspeak->serverGroups()->deletePermission(serverGroupId: 5, id: 42);
+$teamspeak->serverGroups()->deletePermission(serverGroupId: 5, id: 'i_group_needed_modify_power');
 ```
 
 ## servergroupaddclient
 
 ```php
-$teamspeak->serverGroups()->addClient();
+$teamspeak->serverGroups()->addClient(id: 5, clientDatabaseId: 18);
 ```
 
 ## servergroupdelclient
 
 ```php
-$teamspeak->serverGroups()->deleteClient();
+$teamspeak->serverGroups()->deleteClient(id: 5, clientDatabaseId: 18);
 ```
 
 ## servergroupclientlist
 
 ```php
-$teamspeak->serverGroups()->getClients();
+$teamspeak->serverGroups()->getClients(id: 5);
+$teamspeak->serverGroups()->getClients(id: 5, names: true);
 ```
 
 ## servergroupsbyclientid
 
 ```php
-$teamspeak->serverGroups()->getByClient();
+$teamspeak->serverGroups()->getByClient(clientDatabaseId: 18);
 ```
 
 ## servergroupautoaddperm
@@ -179,11 +186,13 @@ Not implemented.
 ## sendtextmessage
 
 ```php
-$teamspeak->messages()->send();
+use TeamSpeak\WebQuery\Enums\TextMessageTargetMode;
+
+$teamspeak->messages()->send(TextMessageTargetMode::Client, 'Hello!', id: 12);
 // also available few shortcuts:
-$teamspeak->messages()->sendToClient();
-$teamspeak->messages()->sendToChannel();
-$teamspeak->messages()->sendToServer();
+$teamspeak->messages()->sendToClient(message: 'Hello!', id: 12);
+$teamspeak->messages()->sendToChannel(message: 'Hello channel!');
+$teamspeak->messages()->sendToServer(message: 'Hello server!');
 ```
 
 ## logview
@@ -205,49 +214,54 @@ $teamspeak->logs()->add(LogLevel::Info, 'custom log message');
 ## gm
 
 ```php
-$teamspeak->messages()->broadcast();
+$teamspeak->messages()->broadcast(message: 'Hello everyone!');
 ```
 
 ## channellist
 
 ```php
 $teamspeak->channels()->list();
+// with options:
+$teamspeak->channels()->list(topic: true, flags: true, voice: true, limits: true, icon: true, secondsEmpty: true);
 ```
 
 ## channelinfo
 
 ```php
-$teamspeak->channels()->info();
+$teamspeak->channels()->info(id: 1);
 ```
 
 ## channelfind
 
 ```php
-$teamspeak->channels()->find();
+$teamspeak->channels()->find(pattern: 'General');
 ```
 
 ## channelmove
 
 ```php
-$teamspeak->channels()->move();
+$teamspeak->channels()->move(id: 5, parentId: 1);
+$teamspeak->channels()->move(id: 5, parentId: 1, order: 3);
 ```
 
 ## channelcreate
 
 ```php
-$teamspeak->channels()->create();
+$teamspeak->channels()->create(name: 'New Channel');
+$teamspeak->channels()->create(name: 'New Channel', properties: ['channel_flag_permanent' => '1']);
 ```
 
 ## channeldelete
 
 ```php
-$teamspeak->channels()->delete();
+$teamspeak->channels()->delete(id: 5);
+$teamspeak->channels()->delete(id: 5, force: true);
 ```
 
 ## channeledit
 
 ```php
-$teamspeak->channels()->edit();
+$teamspeak->channels()->edit(id: 5, properties: ['channel_name' => 'Renamed Channel']);
 ```
 
 ## channelgrouplist
@@ -265,6 +279,7 @@ $teamspeak->channelGroups()->add(name: 'Channel Admin');
 ## channelgroupdel
 
 ```php
+$teamspeak->channelGroups()->delete(id: 5);
 $teamspeak->channelGroups()->delete(id: 5, force: true);
 ```
 
@@ -286,6 +301,7 @@ $teamspeak->channelGroups()->rename(id: 5, name: 'New Name');
 ```php
 $teamspeak->channelGroups()->addPermission(channelGroupId: 5, id: 42, value: 75);
 $teamspeak->channelGroups()->addPermission(channelGroupId: 5, id: 'i_channel_needed_join_power', value: 75);
+$teamspeak->channelGroups()->addPermission(channelGroupId: 5, id: 42, value: 75, skip: true);
 ```
 
 ## channelgrouppermlist
@@ -347,144 +363,159 @@ Not implemented.
 
 ```php
 $teamspeak->clients()->list();
+// with options:
+$teamspeak->clients()->list(uid: true, groups: true, ip: true);
 ```
 
 ## clientinfo
 
 ```php
-$teamspeak->clients()->info();
+$teamspeak->clients()->info(id: 12);
 ```
 
 ## clientfind
 
 ```php
-$teamspeak->clients()->find();
+$teamspeak->clients()->find(pattern: 'John');
 ```
 
 ## clientedit
 
 ```php
-$teamspeak->clients()->edit();
+$teamspeak->clients()->edit(id: 12, properties: ['client_description' => 'VIP member']);
 // also available a shortcut:
-$teamspeak->clients()->editDescription();
+$teamspeak->clients()->editDescription(id: 12, description: 'VIP member');
 ```
 
 ## clientdblist
 
 ```php
 $teamspeak->databaseClients()->list();
+// with pagination and count:
+$teamspeak->databaseClients()->list(offset: 0, limit: 25, count: true);
 ```
 
 ## clientdbinfo
 
 ```php
-$teamspeak->databaseClients()->info();
+$teamspeak->databaseClients()->info(databaseId: 18);
 ```
 
 ## clientdbfind
 
 ```php
-$teamspeak->databaseClients()->find();
+$teamspeak->databaseClients()->find(pattern: 'John%');
+$teamspeak->databaseClients()->find(pattern: 'ABC123==', uid: true);
 // also available few shortcuts:
-$teamspeak->databaseClients()->findByName();
-$teamspeak->databaseClients()->findByUid();
+$teamspeak->databaseClients()->findByName(pattern: 'John%');
+$teamspeak->databaseClients()->findByUid(pattern: 'ABC123==');
 ```
 
 ## clientdbedit
 
 ```php
-$teamspeak->databaseClients()->edit();
+$teamspeak->databaseClients()->edit(databaseId: 18, properties: ['client_description' => 'VIP']);
 // also available a shortcut:
-$teamspeak->databaseClients()->editDescription();
+$teamspeak->databaseClients()->editDescription(databaseId: 18, description: 'VIP');
 ```
 
 ## clientdbdelete
 
 ```php
-$teamspeak->databaseClients()->delete();
+$teamspeak->databaseClients()->delete(databaseId: 18);
 ```
 
 ## clientgetids
 
 ```php
-$teamspeak->clients()->getIds();
+$teamspeak->clients()->getIds(uid: 'ABC123==');
 ```
 
 ## clientgetdbidfromuid
 
 ```php
-$teamspeak->clients()->getDbIdFromUid();
+$teamspeak->clients()->getDbIdFromUid(uid: 'ABC123==');
 ```
 
 ## clientgetnamefromuid
 
 ```php
-$teamspeak->clients()->getNameFromUid();
+$teamspeak->clients()->getNameFromUid(uid: 'ABC123==');
 ```
 
 ## clientgetuidfromclid
 
 ```php
-$teamspeak->clients()->getUid();
+$teamspeak->clients()->getUid(id: 12);
 ```
 
 ## clientgetnamefromdbid
 
 ```php
-$teamspeak->clients()->getNameFromDbId();
+$teamspeak->clients()->getNameFromDbId(dbId: 18);
 ```
 
 ## clientsetserverquerylogin
 
 ```php
-$teamspeak->clients()->setServerQueryLogin();
+$teamspeak->clients()->setServerQueryLogin(loginName: 'admin');
 ```
 
 ## clientupdate
 
 ```php
-$teamspeak->clients()->update();
+$teamspeak->clients()->update(['client_nickname' => 'New Nick']);
 // also available a shortcut:
-$teamspeak->clients()->updateNickname();
+$teamspeak->clients()->updateNickname(nickname: 'New Nick');
 ```
 
 ## clientmove
 
 ```php
-$teamspeak->clients()->move();
+$teamspeak->clients()->move(id: 12, channelId: 3);
+$teamspeak->clients()->move(id: 12, channelId: 3, password: 'secret');
+// move multiple clients at once:
+$teamspeak->clients()->move(id: [12, 13, 14], channelId: 3);
 ```
 
 ## clientkick
 
 ```php
-$teamspeak->clients()->kick();
+use TeamSpeak\WebQuery\Enums\ReasonIdentifier;
+
+$teamspeak->clients()->kick(id: 12, type: ReasonIdentifier::KickServer);
+$teamspeak->clients()->kick(id: 12, type: ReasonIdentifier::KickServer, reason: 'Rule violation');
 // also available few shortcuts:
-$teamspeak->clients()->kickFromChannel();
-$teamspeak->clients()->kickFromServer();
+$teamspeak->clients()->kickFromChannel(id: 12);
+$teamspeak->clients()->kickFromServer(id: 12, reason: 'Rule violation');
 ```
 
 ## clientpoke
 
 ```php
-$teamspeak->clients()->poke();
+$teamspeak->clients()->poke(id: 12, message: 'Hello!');
 ```
 
 ## clientpermlist
 
 ```php
-$teamspeak->clients()->getPermissions();
+$teamspeak->clients()->getPermissions(databaseId: 18);
+$teamspeak->clients()->getPermissions(databaseId: 18, name: true);
 ```
 
 ## clientaddperm
 
 ```php
-$teamspeak->clients()->addPermission();
+$teamspeak->clients()->addPermission(databaseId: 18, id: 42, value: 75);
+$teamspeak->clients()->addPermission(databaseId: 18, id: 'i_client_talk_power', value: 75);
+$teamspeak->clients()->addPermission(databaseId: 18, id: 42, value: 75, skip: true);
 ```
 
 ## clientdelperm
 
 ```php
-$teamspeak->clients()->deletePermission();
+$teamspeak->clients()->deletePermission(databaseId: 18, id: 42);
+$teamspeak->clients()->deletePermission(databaseId: 18, id: 'i_client_talk_power');
 ```
 
 ## channelclientpermlist
@@ -548,28 +579,28 @@ $teamspeak->messages()->listInbox();
 ## messageadd
 
 ```php
-$teamspeak->messages()->sendInbox();
+$teamspeak->messages()->sendInbox(uniqueIdentifier: 'ABC123==', subject: 'Hello', message: 'How are you?');
 ```
 
 ## messagedel
 
 ```php
-$teamspeak->messages()->deleteInbox();
+$teamspeak->messages()->deleteInbox(id: 42);
 ```
 
 ## messageget
 
 ```php
-$teamspeak->messages()->getInbox();
+$teamspeak->messages()->getInbox(id: 42);
 ```
 
 ## messageupdateflag
 
 ```php
-$teamspeak->messages()->updateFlagInbox();
+$teamspeak->messages()->updateFlagInbox(id: 42, flag: true);
 // also available few shortcuts:
-$teamspeak->messages()->markAsReadInbox();
-$teamspeak->messages()->markAsUnreadInbox();
+$teamspeak->messages()->markAsReadInbox(id: 42);
+$teamspeak->messages()->markAsUnreadInbox(id: 42);
 ```
 
 ## complainlist
@@ -601,7 +632,8 @@ $teamspeak->complaints()->delete(targetClientDatabaseId: 5, fromClientDatabaseId
 ## banclient
 
 ```php
-$teamspeak->bans()->client();
+$teamspeak->bans()->client(id: 12);
+$teamspeak->bans()->client(id: 12, seconds: 3600, reason: 'Spam');
 ```
 
 ## banlist
@@ -613,13 +645,15 @@ $teamspeak->bans()->list();
 ## banadd
 
 ```php
-$teamspeak->bans()->add();
+$teamspeak->bans()->add(ipAddressRegexp: '127.0.0.*');
+$teamspeak->bans()->add(nameRegexp: 'baduser%', reason: 'Spam', seconds: 86400);
+$teamspeak->bans()->add(uniqueIdentifier: 'ABC123==');
 ```
 
 ## bandel
 
 ```php
-$teamspeak->bans()->delete();
+$teamspeak->bans()->delete(id: 5);
 ```
 
 ## bandelall
@@ -639,4 +673,3 @@ Not implemented.
 ## whoami
 
 Not implemented.
-
