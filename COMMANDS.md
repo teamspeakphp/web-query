@@ -692,4 +692,6 @@ Not implemented.
 
 ## whoami
 
-Not implemented.
+```php
+$teamspeak->whoami();
+```
