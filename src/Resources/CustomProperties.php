@@ -31,6 +31,19 @@ final class CustomProperties implements CustomPropertiesContract
     }
 
     /**
+     * Sets a custom property for the client with the given database ID.
+     */
+    public function set(int $clientDatabaseId, string $ident, string $value): void
+    {
+        $payload = new Payload(
+            command: Command::CustomSet,
+            parameters: ['cldbid' => $clientDatabaseId, 'ident' => $ident, 'value' => $value],
+        );
+
+        $this->transporter->request($payload);
+    }
+
+    /**
      * Displays all custom properties for the client with the given database ID.
      */
     public function info(int $clientDatabaseId): InfoResponse

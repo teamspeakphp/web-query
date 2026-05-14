@@ -23,6 +23,27 @@ beforeEach(function () {
     );
 });
 
+test('set', function () {
+    $resource = new CustomProperties($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['cldbid' => '18', 'ident' => 'forum_id', 'value' => '12345']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->set(18, 'forum_id', '12345');
+})->doesNotPerformAssertions();
+
 test('search', function () {
     $resource = new CustomProperties($this->http);
 

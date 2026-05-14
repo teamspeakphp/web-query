@@ -122,5 +122,6 @@ enum Command: string
     case BanDelAll = 'bandelall';
     case CustomSearch = 'customsearch';
     case CustomInfo = 'custominfo';
+    case CustomSet = 'customset';
     case WhoAmI = 'whoami';
 }
