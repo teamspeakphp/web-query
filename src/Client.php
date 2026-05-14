@@ -127,7 +127,7 @@ final readonly class Client implements ClientContract
     /**
      * Interact with the server groups.
      */
-    public function serversGroups(): ServerGroups
+    public function serverGroups(): ServerGroups
     {
         return new ServerGroups($this->transporter);
     }

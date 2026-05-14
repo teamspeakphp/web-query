@@ -70,7 +70,7 @@ it('has privilege keys', function () {
 });
 
 it('has server groups', function () {
-    expect($this->client->serversGroups())->toBeInstanceOf(ServerGroups::class);
+    expect($this->client->serverGroups())->toBeInstanceOf(ServerGroups::class);
 });
 
 it('has servers', function () {

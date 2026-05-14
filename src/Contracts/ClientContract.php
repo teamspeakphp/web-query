@@ -85,7 +85,7 @@ interface ClientContract
     /**
      * Interact with the server groups.
      */
-    public function serversGroups(): ServerGroupsContract;
+    public function serverGroups(): ServerGroupsContract;
 
     /**
      * Interact with the servers.
