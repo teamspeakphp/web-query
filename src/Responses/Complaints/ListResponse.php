@@ -12,7 +12,7 @@ final class ListResponse
     private function __construct(public array $complaints) {}
 
     /**
-     * @param  list<array{tcldbid: string, tclname: string, fcldbid: string, fclname: string, message: string, timestamp: string}>  $attributes
+     * @param  list<array{tcldbid: string, tname: string, fcldbid: string, fname: string, message: string, timestamp: string}>  $attributes
      */
     public static function from(array $attributes): self
     {

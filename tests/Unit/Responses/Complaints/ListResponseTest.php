@@ -8,9 +8,9 @@ use TeamSpeak\WebQuery\Responses\Complaints\ListResponseComplaint;
 test('from', function () {
     $response = ListResponse::from([[
         'tcldbid' => '5',
-        'tclname' => 'Target',
+        'tname' => 'Target',
         'fcldbid' => '3',
-        'fclname' => 'Reporter',
+        'fname' => 'Reporter',
         'message' => 'bad behavior',
         'timestamp' => '1719081785',
     ]]);

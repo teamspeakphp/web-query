@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TeamSpeak\WebQuery\Responses\Complaints;
 
 use DateTimeImmutable;
+use DateTimeZone;
 
 final class ListResponseComplaint
 {
@@ -18,17 +19,17 @@ final class ListResponseComplaint
     ) {}
 
     /**
-     * @param  array{tcldbid: string, tclname: string, fcldbid: string, fclname: string, message: string, timestamp: string}  $attributes
+     * @param  array{tcldbid: string, tname: string, fcldbid: string, fname: string, message: string, timestamp: string}  $attributes
      */
     public static function from(array $attributes): self
     {
         return new self(
             (int) $attributes['tcldbid'],
-            $attributes['tclname'],
+            $attributes['tname'],
             (int) $attributes['fcldbid'],
-            $attributes['fclname'],
+            $attributes['fname'],
             $attributes['message'],
-            DateTimeImmutable::createFromTimestamp((int) $attributes['timestamp']),
+            DateTimeImmutable::createFromTimestamp((int) $attributes['timestamp'])->setTimezone(new DateTimeZone('UTC')),
         );
     }
 }

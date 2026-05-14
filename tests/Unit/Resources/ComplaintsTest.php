@@ -29,9 +29,9 @@ test('list', function () {
     $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
         'body' => [[
             'tcldbid' => '5',
-            'tclname' => 'Target',
+            'tname' => 'Target',
             'fcldbid' => '3',
-            'fclname' => 'Reporter',
+            'fname' => 'Reporter',
             'message' => 'bad behavior',
             'timestamp' => '1719081785',
         ]],
@@ -52,9 +52,9 @@ test('list filtered by target client', function () {
     $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
         'body' => [[
             'tcldbid' => '5',
-            'tclname' => 'Target',
+            'tname' => 'Target',
             'fcldbid' => '3',
-            'fclname' => 'Reporter',
+            'fname' => 'Reporter',
             'message' => 'bad behavior',
             'timestamp' => '1719081785',
         ]],

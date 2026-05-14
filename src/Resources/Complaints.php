@@ -25,7 +25,7 @@ final class Complaints implements ComplaintsContract
             parameters: ['tcldbid' => $targetClientDatabaseId],
         );
 
-        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<list<array{tcldbid: string, tclname: string, fcldbid: string, fclname: string, message: string, timestamp: string}>> $response */
+        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<list<array{tcldbid: string, tname: string, fcldbid: string, fname: string, message: string, timestamp: string}>> $response */
         $response = $this->transporter->request($payload);
 
         return ListResponse::from($response->body());
