@@ -216,6 +216,8 @@ $teamspeak->serverGroups()->getByClient(clientDatabaseId: 18);
 ## servergroupautoaddperm
 
 ```php
+use TeamSpeak\WebQuery\Enums\PermissionGroupDatabaseTypes;
+
 $teamspeak->serverGroups()->addAutoPermission(type: PermissionGroupDatabaseTypes::Regular, id: 17835, value: 75);
 $teamspeak->serverGroups()->addAutoPermission(type: PermissionGroupDatabaseTypes::Regular, id: 'b_serverinstance_help_view', value: 75, negated: true, skip: true);
 ```
@@ -223,6 +225,8 @@ $teamspeak->serverGroups()->addAutoPermission(type: PermissionGroupDatabaseTypes
 ## servergroupautodelperm
 
 ```php
+use TeamSpeak\WebQuery\Enums\PermissionGroupDatabaseTypes;
+
 $teamspeak->serverGroups()->deleteAutoPermission(type: PermissionGroupDatabaseTypes::Regular, id: 17835);
 $teamspeak->serverGroups()->deleteAutoPermission(type: PermissionGroupDatabaseTypes::Regular, id: 'b_serverinstance_help_view');
 ```
@@ -655,10 +659,13 @@ $teamspeak->privilegeKeys()->list();
 ## privilegekeyadd
 
 ```php
-// Server group key (type 0):
-$teamspeak->privilegeKeys()->add(type: 0, id1: 6);
-// Channel group key (type 1):
-$teamspeak->privilegeKeys()->add(type: 1, id1: 5, id2: 3, description: 'VIP channel', customSet: 'custom');
+use TeamSpeak\WebQuery\Enums\PrivilegeKeyType;
+
+$teamspeak->privilegeKeys()->add(type: PrivilegeKeyType::ServerGroup, id1: 6);
+$teamspeak->privilegeKeys()->add(type: PrivilegeKeyType::ChannelGroup, id1: 5, id2: 3, description: 'VIP channel', customSet: 'custom');
+// also available shortcuts:
+$teamspeak->privilegeKeys()->addServerGroup(serverGroupId: 6);
+$teamspeak->privilegeKeys()->addChannelGroup(channelGroupId: 5, channelId: 3);
 ```
 
 ## privilegekeydelete
