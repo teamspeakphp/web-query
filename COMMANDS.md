@@ -385,19 +385,19 @@ $teamspeak->channelGroups()->setClientChannelGroup(channelGroupId: 5, channelId:
 
 ## tokenadd
 
-Not implemented.
+Alias for `privilegekeyadd`. See [privilegekeyadd](#privilegekeyadd).
 
 ## tokendelete
 
-Not implemented.
+Alias for `privilegekeydelete`. See [privilegekeydelete](#privilegekeydelete).
 
 ## tokenlist
 
-Not implemented.
+Alias for `privilegekeylist`. See [privilegekeylist](#privilegekeylist).
 
 ## tokenuse
 
-Not implemented.
+Alias for `privilegekeyuse`. See [privilegekeyuse](#privilegekeyuse).
 
 ## channelpermlist
 
@@ -642,19 +642,30 @@ $teamspeak->permissions()->reset();
 
 ## privilegekeylist
 
-Not implemented.
+```php
+$teamspeak->privilegeKeys()->list();
+```
 
 ## privilegekeyadd
 
-Not implemented.
+```php
+// Server group key (type 0):
+$teamspeak->privilegeKeys()->add(type: 0, id1: 6);
+// Channel group key (type 1):
+$teamspeak->privilegeKeys()->add(type: 1, id1: 5, id2: 3, description: 'VIP channel', customSet: 'custom');
+```
 
 ## privilegekeydelete
 
-Not implemented.
+```php
+$teamspeak->privilegeKeys()->delete(token: 'eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=');
+```
 
 ## privilegekeyuse
 
-Not implemented.
+```php
+$teamspeak->privilegeKeys()->redeem(token: 'eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=');
+```
 
 ## messagelist
 
