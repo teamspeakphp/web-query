@@ -9,33 +9,33 @@ final readonly class ListResponseServer
     private function __construct(
         public int $id,
         public string $status,
-        public int $clientsOnline,
-        public int $queryClientsOnline,
-        public int $maxClients,
-        public int $uptime,
         public string $name,
-        public bool $autostart,
-        public string $machineId,
         public int $port,
+        public ?int $clientsOnline,
+        public ?int $queryClientsOnline,
+        public ?int $maxClients,
+        public ?int $uptime,
+        public ?bool $autostart,
+        public ?string $machineId,
         public ?string $uniqueIdentifier,
     ) {}
 
     /**
-     * @param  array{sid: string, virtualserver_status: string, virtualserver_clientsonline: string, virtualserver_queryclientsonline: string, virtualserver_maxclients: string, virtualserver_uptime: string, virtualserver_name: string, virtualserver_autostart: string, virtualserver_machine_id: string, virtualserver_port: string, virtualserver_unique_identifier?: string}  $attributes
+     * @param  array{virtualserver_id: string, virtualserver_status: string, virtualserver_name: string, virtualserver_port: string, virtualserver_clientsonline?: string, virtualserver_queryclientsonline?: string, virtualserver_maxclients?: string, virtualserver_uptime?: string, virtualserver_autostart?: string, virtualserver_machine_id?: string, virtualserver_unique_identifier?: string}  $attributes
      */
     public static function from(array $attributes): self
     {
         return new self(
-            (int) $attributes['sid'],
+            (int) $attributes['virtualserver_id'],
             $attributes['virtualserver_status'],
-            (int) $attributes['virtualserver_clientsonline'],
-            (int) $attributes['virtualserver_queryclientsonline'],
-            (int) $attributes['virtualserver_maxclients'],
-            (int) $attributes['virtualserver_uptime'],
             $attributes['virtualserver_name'],
-            (bool) $attributes['virtualserver_autostart'],
-            $attributes['virtualserver_machine_id'],
             (int) $attributes['virtualserver_port'],
+            isset($attributes['virtualserver_clientsonline']) ? (int) $attributes['virtualserver_clientsonline'] : null,
+            isset($attributes['virtualserver_queryclientsonline']) ? (int) $attributes['virtualserver_queryclientsonline'] : null,
+            isset($attributes['virtualserver_maxclients']) ? (int) $attributes['virtualserver_maxclients'] : null,
+            isset($attributes['virtualserver_uptime']) ? (int) $attributes['virtualserver_uptime'] : null,
+            isset($attributes['virtualserver_autostart']) ? (bool) $attributes['virtualserver_autostart'] : null,
+            $attributes['virtualserver_machine_id'] ?? null,
             $attributes['virtualserver_unique_identifier'] ?? null,
         );
     }

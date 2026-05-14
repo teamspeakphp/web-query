@@ -135,7 +135,7 @@ test('list', function () {
 
     $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
         'body' => [[
-            'sid' => '1',
+            'virtualserver_id' => '1',
             'virtualserver_status' => 'online',
             'virtualserver_clientsonline' => '5',
             'virtualserver_queryclientsonline' => '1',
@@ -163,12 +163,40 @@ test('list', function () {
     expect($resource->list(uid: true, short: true, all: true, onlyOffline: true)->servers)->toHaveCount(1);
 });
 
+test('list short response returns nullable fields as null', function () {
+    $resource = new Servers($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'body' => [[
+            'virtualserver_id' => '1',
+            'virtualserver_status' => 'online',
+            'virtualserver_name' => 'TeamSpeak Server',
+            'virtualserver_port' => '9987',
+        ]],
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->andReturn($response);
+
+    $server = $resource->list(short: true)->servers[0];
+
+    expect($server->clientsOnline)->toBeNull()
+        ->and($server->queryClientsOnline)->toBeNull()
+        ->and($server->maxClients)->toBeNull()
+        ->and($server->uptime)->toBeNull()
+        ->and($server->autostart)->toBeNull()
+        ->and($server->machineId)->toBeNull();
+});
+
 test('list default sends empty body', function () {
     $resource = new Servers($this->http);
 
     $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
         'body' => [[
-            'sid' => '1',
+            'virtualserver_id' => '1',
             'virtualserver_status' => 'online',
             'virtualserver_clientsonline' => '5',
             'virtualserver_queryclientsonline' => '1',

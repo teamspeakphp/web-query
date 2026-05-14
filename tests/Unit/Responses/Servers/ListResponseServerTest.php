@@ -6,7 +6,7 @@ use TeamSpeak\WebQuery\Responses\Servers\ListResponseServer;
 
 test('from', function () {
     $server = ListResponseServer::from([
-        'sid' => '1',
+        'virtualserver_id' => '1',
         'virtualserver_status' => 'online',
         'virtualserver_clientsonline' => '5',
         'virtualserver_queryclientsonline' => '1',
@@ -26,13 +26,14 @@ test('from', function () {
         ->and($server->uptime)->toBe(3600)
         ->and($server->name)->toBe('TeamSpeak Server')
         ->and($server->autostart)->toBeTrue()
+        ->and($server->machineId)->toBe('')
         ->and($server->port)->toBe(9987)
         ->and($server->uniqueIdentifier)->toBeNull();
 });
 
 test('from with uid', function () {
     $server = ListResponseServer::from([
-        'sid' => '1',
+        'virtualserver_id' => '1',
         'virtualserver_status' => 'online',
         'virtualserver_clientsonline' => '0',
         'virtualserver_queryclientsonline' => '0',
@@ -46,4 +47,22 @@ test('from with uid', function () {
     ]);
 
     expect($server->uniqueIdentifier)->toBe('dwcJxlwg51mhDP1nlVQh51sIIzo=');
+});
+
+test('from short', function () {
+    $server = ListResponseServer::from([
+        'virtualserver_id' => '2',
+        'virtualserver_status' => 'online',
+        'virtualserver_name' => 'TS3',
+        'virtualserver_port' => '9987',
+    ]);
+
+    expect($server->id)->toBe(2)
+        ->and($server->clientsOnline)->toBeNull()
+        ->and($server->queryClientsOnline)->toBeNull()
+        ->and($server->maxClients)->toBeNull()
+        ->and($server->uptime)->toBeNull()
+        ->and($server->autostart)->toBeNull()
+        ->and($server->machineId)->toBeNull()
+        ->and($server->uniqueIdentifier)->toBeNull();
 });
