@@ -271,6 +271,11 @@ $teamspeak->logs()->list(lines: 50, reverse: true, instance: true, beginPos: 100
 use TeamSpeak\WebQuery\Enums\LogLevel;
 
 $teamspeak->logs()->add(LogLevel::Info, 'custom log message');
+// also available shortcuts:
+$teamspeak->logs()->error('something failed');
+$teamspeak->logs()->warning('something suspicious');
+$teamspeak->logs()->debug('debug info');
+$teamspeak->logs()->info('server started');
 ```
 
 ## gm

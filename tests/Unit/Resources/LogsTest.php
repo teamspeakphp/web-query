@@ -106,3 +106,87 @@ test('add', function () {
 
     $resource->add(LogLevel::Info, 'test message');
 })->doesNotPerformAssertions();
+
+test('error shortcut', function () {
+    $resource = new Logs($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['loglevel' => '1', 'logmsg' => 'something failed']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->error('something failed');
+})->doesNotPerformAssertions();
+
+test('warning shortcut', function () {
+    $resource = new Logs($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['loglevel' => '2', 'logmsg' => 'something suspicious']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->warning('something suspicious');
+})->doesNotPerformAssertions();
+
+test('debug shortcut', function () {
+    $resource = new Logs($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['loglevel' => '3', 'logmsg' => 'debug info']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->debug('debug info');
+})->doesNotPerformAssertions();
+
+test('info shortcut', function () {
+    $resource = new Logs($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['loglevel' => '4', 'logmsg' => 'server started']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->info('server started');
+})->doesNotPerformAssertions();

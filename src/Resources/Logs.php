@@ -42,4 +42,36 @@ final class Logs implements LogsContract
 
         $this->transporter->request($payload);
     }
+
+    /**
+     * Writes an error entry into the server log.
+     */
+    public function error(string $message): void
+    {
+        $this->add(LogLevel::Error, $message);
+    }
+
+    /**
+     * Writes a warning entry into the server log.
+     */
+    public function warning(string $message): void
+    {
+        $this->add(LogLevel::Warning, $message);
+    }
+
+    /**
+     * Writes a debug entry into the server log.
+     */
+    public function debug(string $message): void
+    {
+        $this->add(LogLevel::Debug, $message);
+    }
+
+    /**
+     * Writes an info entry into the server log.
+     */
+    public function info(string $message): void
+    {
+        $this->add(LogLevel::Info, $message);
+    }
 }
