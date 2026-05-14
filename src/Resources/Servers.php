@@ -239,7 +239,7 @@ final class Servers implements ServersContract
             parameters: [
                 'pw' => $password,
                 'desc' => $description,
-                'theduration' => $duration,
+                'duration' => $duration,
                 'tcid' => $channelId,
                 'tcpw' => $channelPassword,
             ],

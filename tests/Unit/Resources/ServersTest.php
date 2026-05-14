@@ -530,7 +530,7 @@ test('add temp password', function () {
         ->withArgs(function (Psr7Request $request) {
             expect($request->getBody()->getContents())->toBeJson()
                 ->json()
-                ->toBe(['pw' => 'secret', 'desc' => 'Guest pass', 'theduration' => '3600', 'tcid' => '0', 'tcpw' => '']);
+                ->toBe(['pw' => 'secret', 'desc' => 'Guest pass', 'duration' => '3600', 'tcid' => '0', 'tcpw' => '']);
 
             return true;
         })->andReturn($response);
