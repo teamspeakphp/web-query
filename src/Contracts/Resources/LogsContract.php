@@ -18,4 +18,24 @@ interface LogsContract
      * Writes a custom entry into the server log.
      */
     public function add(LogLevel $level, string $message): void;
+
+    /**
+     * Writes an error entry into the server log.
+     */
+    public function error(string $message): void;
+
+    /**
+     * Writes a warning entry into the server log.
+     */
+    public function warning(string $message): void;
+
+    /**
+     * Writes a debug entry into the server log.
+     */
+    public function debug(string $message): void;
+
+    /**
+     * Writes an info entry into the server log.
+     */
+    public function info(string $message): void;
 }
