@@ -6,8 +6,6 @@
 
 PHP TeamSpeak 3 WebQuery client.
 
-> Note: This package is still under active development and is not yet ready for production use.
-
 ## Features
 
 To see all commands that implemented, see [COMMANDS](COMMANDS.md).
