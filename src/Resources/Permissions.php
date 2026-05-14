@@ -49,12 +49,18 @@ final class Permissions implements PermissionsContract
 
     /**
      * Displays all permissions for a client in a specific channel.
+     *
+     * A permission can be specified by ID or name.
      */
-    public function overview(int $channelId, int $clientDatabaseId): OverviewResponse
+    public function overview(int $channelId, int $clientDatabaseId, string|int $permission): OverviewResponse
     {
         $payload = new Payload(
             command: Command::PermOverview,
-            parameters: ['cid' => $channelId, 'cldbid' => $clientDatabaseId],
+            parameters: [
+                'cid' => $channelId,
+                'cldbid' => $clientDatabaseId,
+                ...is_int($permission) ? ['permid' => $permission] : ['permsid' => $permission],
+            ],
         );
 
         /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<list<array{t: string, id1: string, id2: string, p: string, v: string, n: string, s: string}>> $response */

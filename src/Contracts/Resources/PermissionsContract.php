@@ -25,8 +25,10 @@ interface PermissionsContract
 
     /**
      * Displays all permissions for a client in a specific channel.
+     *
+     * A permission can be specified by ID or name.
      */
-    public function overview(int $channelId, int $clientDatabaseId): OverviewResponse;
+    public function overview(int $channelId, int $clientDatabaseId, string|int $permission): OverviewResponse;
 
     /**
      * Displays the current value of a permission for the selected virtual server.

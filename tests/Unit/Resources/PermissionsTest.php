@@ -74,7 +74,7 @@ test('get id by name', function () {
         ->and($result->name)->toBe('b_serverinstance_help_view');
 });
 
-test('overview', function () {
+test('overview by permission ID', function () {
     $resource = new Permissions($this->http);
 
     $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
@@ -96,12 +96,42 @@ test('overview', function () {
         ->withArgs(function (Psr7Request $request) {
             expect($request->getBody()->getContents())->toBeJson()
                 ->json()
-                ->toBe(['cid' => '1', 'cldbid' => '2']);
+                ->toBe(['cid' => '1', 'cldbid' => '2', 'permid' => '17']);
 
             return true;
         })->andReturn($response);
 
-    expect($resource->overview(1, 2)->permissions)->toBeArray()->toHaveCount(1);
+    expect($resource->overview(1, 2, 17)->permissions)->toBeArray()->toHaveCount(1);
+});
+
+test('overview by permission name', function () {
+    $resource = new Permissions($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'body' => [[
+            't' => '0',
+            'id1' => '0',
+            'id2' => '0',
+            'p' => '17',
+            'v' => '1',
+            'n' => '0',
+            's' => '0',
+        ]],
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['cid' => '1', 'cldbid' => '2', 'permsid' => 'b_serverinstance_help_view']);
+
+            return true;
+        })->andReturn($response);
+
+    expect($resource->overview(1, 2, 'b_serverinstance_help_view')->permissions)->toBeArray()->toHaveCount(1);
 });
 
 test('get by ID', function () {
