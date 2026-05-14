@@ -21,7 +21,6 @@ use TeamSpeak\WebQuery\Resources\Permissions;
 use TeamSpeak\WebQuery\Resources\PrivilegeKeys;
 use TeamSpeak\WebQuery\Resources\ServerGroups;
 use TeamSpeak\WebQuery\Resources\Servers;
-use TeamSpeak\WebQuery\Resources\Tokens;
 use TeamSpeak\WebQuery\Responses\WhoAmI\WhoAmIResponse;
 use TeamSpeak\WebQuery\ValueObjects\Transporter\Payload;
 
@@ -139,14 +138,6 @@ final readonly class Client implements ClientContract
     public function servers(): Servers
     {
         return new Servers($this->transporter);
-    }
-
-    /**
-     * Interact with the tokens.
-     */
-    public function tokens(): Tokens
-    {
-        return new Tokens($this->transporter);
     }
 
     /**
