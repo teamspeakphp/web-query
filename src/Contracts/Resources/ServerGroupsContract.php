@@ -117,4 +117,14 @@ interface ServerGroupsContract
      * Displays all server groups the client is currently residing in.
      */
     public function getByClient(int $clientDatabaseId): GetByClientResponse;
+
+    /**
+     * Adds a permission to all server groups of the specified type.
+     */
+    public function addAutoPermission(PermissionGroupDatabaseTypes $type, string|int $id, int $value, bool $negated = false, bool $skip = false): void;
+
+    /**
+     * Removes a permission from all server groups of the specified type.
+     */
+    public function deleteAutoPermission(PermissionGroupDatabaseTypes $type, string|int $id): void;
 }

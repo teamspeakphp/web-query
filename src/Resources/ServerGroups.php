@@ -261,4 +261,41 @@ final class ServerGroups implements ServerGroupsContract
 
         return GetByClientResponse::from($response->body());
     }
+
+    /**
+     * Adds a permission to all server groups of the specified type.
+     */
+    public function addAutoPermission(PermissionGroupDatabaseTypes $type, string|int $id, int $value, bool $negated = false, bool $skip = false): void
+    {
+        $payload = new Payload(
+            command: Command::ServerGroupAutoAddPerm,
+            parameters: [
+                'sgtype' => $type->value,
+                ...is_int($id) ? ['permid' => $id] : [],
+                ...is_string($id) ? ['permsid' => $id] : [],
+                'permvalue' => $value,
+                'permnegated' => $negated,
+                'permskip' => $skip,
+            ],
+        );
+
+        $this->transporter->request($payload);
+    }
+
+    /**
+     * Removes a permission from all server groups of the specified type.
+     */
+    public function deleteAutoPermission(PermissionGroupDatabaseTypes $type, string|int $id): void
+    {
+        $payload = new Payload(
+            command: Command::ServerGroupAutoDelPerm,
+            parameters: [
+                'sgtype' => $type->value,
+                ...is_int($id) ? ['permid' => $id] : [],
+                ...is_string($id) ? ['permsid' => $id] : [],
+            ],
+        );
+
+        $this->transporter->request($payload);
+    }
 }
