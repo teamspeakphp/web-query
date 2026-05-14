@@ -292,13 +292,16 @@ final class Servers implements ServersContract
     /**
      * Creates a snapshot of the selected virtual server.
      *
-     * Returns the snapshot hash and data which can be used with deploySnapshot.
+     * Provide a password to encrypt the snapshot; the response will include a salt field.
      */
-    public function createSnapshot(): CreateSnapshotResponse
+    public function createSnapshot(?string $password = null): CreateSnapshotResponse
     {
-        $payload = new Payload(Command::ServerSnapshotCreate);
+        $payload = new Payload(
+            command: Command::ServerSnapshotCreate,
+            parameters: ['password' => $password],
+        );
 
-        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{hash: string, virtualserver_snapshot: string}}> $response */
+        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<array{0: array{data: string, version: string, salt?: string}}> $response */
         $response = $this->transporter->request($payload);
 
         return CreateSnapshotResponse::from($response->body());

@@ -606,8 +606,8 @@ test('create snapshot', function () {
 
     $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
         'body' => [[
-            'hash' => 'abc123',
-            'virtualserver_snapshot' => 'base64encodedsnapshotdata==',
+            'data' => 'base64encodedsnapshotdata==',
+            'version' => '12',
         ]],
         'status' => ['code' => 0, 'message' => 'ok'],
     ]));
@@ -622,8 +622,37 @@ test('create snapshot', function () {
         })->andReturn($response);
 
     $result = $resource->createSnapshot();
-    expect($result->hash)->toBe('abc123')
-        ->and($result->data)->toBe('base64encodedsnapshotdata==');
+    expect($result->data)->toBe('base64encodedsnapshotdata==')
+        ->and($result->version)->toBe('12')
+        ->and($result->salt)->toBeNull();
+});
+
+test('create snapshot with password', function () {
+    $resource = new Servers($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'body' => [[
+            'data' => 'encryptedsnapshotdata==',
+            'version' => '12',
+            'salt' => 'abc123salt==',
+        ]],
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['password' => 'secret']);
+
+            return true;
+        })->andReturn($response);
+
+    $result = $resource->createSnapshot(password: 'secret');
+    expect($result->data)->toBe('encryptedsnapshotdata==')
+        ->and($result->salt)->toBe('abc123salt==');
 });
 
 test('deploy snapshot', function () {

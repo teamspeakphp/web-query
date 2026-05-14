@@ -119,9 +119,9 @@ interface ServersContract
     /**
      * Creates a snapshot of the selected virtual server.
      *
-     * Returns the snapshot hash and data which can be used with deploySnapshot.
+     * Provide a password to encrypt the snapshot; the response will include a salt field.
      */
-    public function createSnapshot(): CreateSnapshotResponse;
+    public function createSnapshot(?string $password = null): CreateSnapshotResponse;
 
     /**
      * Deploys a previously created virtual server snapshot.
