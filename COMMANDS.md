@@ -767,11 +767,15 @@ $teamspeak->bans()->deleteAll();
 
 ## customsearch
 
-Not implemented.
+```php
+$teamspeak->customProperties()->search(ident: 'forum_id', pattern: '12345');
+```
 
 ## custominfo
 
-Not implemented.
+```php
+$teamspeak->customProperties()->info(clientDatabaseId: 18);
+```
 
 ## whoami
 
