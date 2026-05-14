@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TeamSpeak\WebQuery\Responses\Logs;
 
 use DateTimeImmutable;
+use DateTimeZone;
 use TeamSpeak\WebQuery\Enums\LogLevel;
 
 final class ListResponseLog
@@ -32,7 +33,7 @@ final class ListResponseLog
         };
 
         return new self(
-            DateTimeImmutable::createFromFormat('Y-m-d H:i:s.u', mb_trim($parts[0])) ?: new DateTimeImmutable(),
+            DateTimeImmutable::createFromFormat('Y-m-d H:i:s.u', mb_trim($parts[0]), new DateTimeZone('UTC')) ?: new DateTimeImmutable('now', new DateTimeZone('UTC')),
             $level,
             mb_trim($parts[2]),
             (int) mb_trim($parts[3]),

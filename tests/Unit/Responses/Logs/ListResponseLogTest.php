@@ -11,6 +11,8 @@ test('from info', function () {
     ]);
 
     expect($log->timestamp)->toBeInstanceOf(DateTimeImmutable::class)
+        ->and($log->timestamp->getTimezone()->getName())->toBe('UTC')
+        ->and($log->timestamp->format('Y-m-d H:i:s'))->toBe('2024-06-22 20:03:05')
         ->and($log->level)->toBe(LogLevel::Info)
         ->and($log->channel)->toBe('VirtualServer')
         ->and($log->serverId)->toBe(1)
