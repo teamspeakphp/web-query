@@ -5,6 +5,7 @@ declare(strict_types=1);
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Client\ClientInterface;
+use TeamSpeak\WebQuery\Enums\PrivilegeKeyType;
 use TeamSpeak\WebQuery\Resources\PrivilegeKeys;
 use TeamSpeak\WebQuery\Transporters\HttpTransporter;
 use TeamSpeak\WebQuery\ValueObjects\ApiKey;
@@ -69,7 +70,7 @@ test('add server group key', function () {
             return true;
         })->andReturn($response);
 
-    expect($resource->add(0, 6)->token)->toBe('eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=');
+    expect($resource->add(PrivilegeKeyType::ServerGroup, 6)->token)->toBe('eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=');
 });
 
 test('add channel group key', function () {
@@ -91,7 +92,51 @@ test('add channel group key', function () {
             return true;
         })->andReturn($response);
 
-    expect($resource->add(1, 5, 3, 'VIP channel', 'custom')->token)->toBe('eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=');
+    expect($resource->add(PrivilegeKeyType::ChannelGroup, 5, 3, 'VIP channel', 'custom')->token)->toBe('eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=');
+});
+
+test('add server group shortcut', function () {
+    $resource = new PrivilegeKeys($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'body' => [['token' => 'eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=']],
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['tokentype' => '0', 'tokenid1' => '6', 'tokenid2' => '0']);
+
+            return true;
+        })->andReturn($response);
+
+    expect($resource->addServerGroup(6)->token)->toBe('eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=');
+});
+
+test('add channel group shortcut', function () {
+    $resource = new PrivilegeKeys($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'body' => [['token' => 'eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=']],
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['tokentype' => '1', 'tokenid1' => '5', 'tokenid2' => '3']);
+
+            return true;
+        })->andReturn($response);
+
+    expect($resource->addChannelGroup(5, 3)->token)->toBe('eKnFZQ9EK7G7EmPvt1Ch7vsXi5Uq+1Us7xrQKBVsMxM=');
 });
 
 test('delete', function () {
