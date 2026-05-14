@@ -165,7 +165,7 @@ final class ServerGroups implements ServerGroupsContract
     /**
      * Adds a permission to the server group.
      */
-    public function addPermission(int $serverGroupId, string|int $id, int $value, bool $skip = false): void
+    public function addPermission(int $serverGroupId, string|int $id, int $value, bool $negated = false, bool $skip = false): void
     {
         $payload = new Payload(
             command: Command::ServerGroupAddPerm,
@@ -174,6 +174,7 @@ final class ServerGroups implements ServerGroupsContract
                 ...is_int($id) ? ['permid' => $id] : [],
                 ...is_string($id) ? ['permsid' => $id] : [],
                 'permvalue' => $value,
+                'permnegated' => $negated,
                 'permskip' => $skip,
             ],
         );
@@ -187,7 +188,7 @@ final class ServerGroups implements ServerGroupsContract
     public function deletePermission(int $serverGroupId, string|int $id): void
     {
         $payload = new Payload(
-            command: Command::ClientDelPerm,
+            command: Command::ServerGroupDelPerm,
             parameters: [
                 'sgid' => $serverGroupId,
                 ...is_int($id) ? ['permid' => $id] : [],
@@ -252,7 +253,7 @@ final class ServerGroups implements ServerGroupsContract
     public function getByClient(int $clientDatabaseId): GetByClientResponse
     {
         $payload = new Payload(
-            command: Command::ServerGroupCopy,
+            command: Command::ServerGroupsByClientId,
             parameters: ['cldbid' => $clientDatabaseId],
         );
 

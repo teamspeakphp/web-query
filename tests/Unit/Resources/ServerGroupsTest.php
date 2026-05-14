@@ -341,13 +341,14 @@ test('add permission with ID', function () {
                     'sgid' => '10',
                     'permid' => '10',
                     'permvalue' => '75',
+                    'permnegated' => '0',
                     'permskip' => '1',
                 ]);
 
             return true;
         })->andReturn($response);
 
-    $resource->addPermission(10, 10, 75, true);
+    $resource->addPermission(10, 10, 75, false, true);
 });
 
 test('add permission with name', function () {
@@ -367,13 +368,14 @@ test('add permission with name', function () {
                     'sgid' => '10',
                     'permsid' => 'i_client_max_clones_uid',
                     'permvalue' => '75',
+                    'permnegated' => '0',
                     'permskip' => '1',
                 ]);
 
             return true;
         })->andReturn($response);
 
-    $resource->addPermission(10, 'i_client_max_clones_uid', 75, true);
+    $resource->addPermission(10, 'i_client_max_clones_uid', 75, false, true);
 });
 
 test('delete permission by ID', function () {

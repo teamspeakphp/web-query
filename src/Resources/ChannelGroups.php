@@ -151,7 +151,7 @@ final class ChannelGroups implements ChannelGroupsContract
      *
      * Optionally filter by channel or client database ID.
      */
-    public function getClients(int $id, ?int $channelId = null, ?int $clientDatabaseId = null): GetClientsResponse
+    public function getClients(?int $id = null, ?int $channelId = null, ?int $clientDatabaseId = null): GetClientsResponse
     {
         $payload = new Payload(
             command: Command::ChannelGroupClientList,

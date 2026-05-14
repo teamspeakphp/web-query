@@ -86,7 +86,7 @@ interface ServerGroupsContract
     /**
      * Adds a permission to the server group.
      */
-    public function addPermission(int $serverGroupId, string|int $id, int $value, bool $skip = false): void;
+    public function addPermission(int $serverGroupId, string|int $id, int $value, bool $negated = false, bool $skip = false): void;
 
     /**
      * Removes a permission from the server group.

@@ -62,7 +62,7 @@ interface ChannelGroupsContract
      *
      * Optionally filter by channel or client database ID.
      */
-    public function getClients(int $id, ?int $channelId = null, ?int $clientDatabaseId = null): GetClientsResponse;
+    public function getClients(?int $id = null, ?int $channelId = null, ?int $clientDatabaseId = null): GetClientsResponse;
 
     /**
      * Sets the channel group of a client in the specified channel.
