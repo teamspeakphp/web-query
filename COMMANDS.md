@@ -215,11 +215,17 @@ $teamspeak->serverGroups()->getByClient(clientDatabaseId: 18);
 
 ## servergroupautoaddperm
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->addAutoPermission(type: PermissionGroupDatabaseTypes::Regular, id: 17835, value: 75);
+$teamspeak->serverGroups()->addAutoPermission(type: PermissionGroupDatabaseTypes::Regular, id: 'b_serverinstance_help_view', value: 75, negated: true, skip: true);
+```
 
 ## servergroupautodelperm
 
-Not implemented.
+```php
+$teamspeak->serverGroups()->deleteAutoPermission(type: PermissionGroupDatabaseTypes::Regular, id: 17835);
+$teamspeak->serverGroups()->deleteAutoPermission(type: PermissionGroupDatabaseTypes::Regular, id: 'b_serverinstance_help_view');
+```
 
 ## serversnapshotcreate
 

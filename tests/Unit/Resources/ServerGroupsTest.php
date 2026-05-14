@@ -5,6 +5,7 @@ declare(strict_types=1);
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Client\ClientInterface;
+use TeamSpeak\WebQuery\Enums\PermissionGroupDatabaseTypes;
 use TeamSpeak\WebQuery\Resources\ServerGroups;
 use TeamSpeak\WebQuery\Transporters\HttpTransporter;
 use TeamSpeak\WebQuery\ValueObjects\ApiKey;
@@ -525,3 +526,87 @@ test('get by client', function () {
 
     $resource->getByClient(18);
 });
+
+test('add auto permission by ID', function () {
+    $resource = new ServerGroups($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['sgtype' => '1', 'permid' => '17835', 'permvalue' => '75', 'permnegated' => '0', 'permskip' => '0']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->addAutoPermission(PermissionGroupDatabaseTypes::Regular, 17835, 75);
+})->doesNotPerformAssertions();
+
+test('add auto permission by name', function () {
+    $resource = new ServerGroups($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['sgtype' => '1', 'permsid' => 'b_serverinstance_help_view', 'permvalue' => '75', 'permnegated' => '1', 'permskip' => '1']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->addAutoPermission(PermissionGroupDatabaseTypes::Regular, 'b_serverinstance_help_view', 75, true, true);
+})->doesNotPerformAssertions();
+
+test('delete auto permission by ID', function () {
+    $resource = new ServerGroups($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['sgtype' => '1', 'permid' => '17835']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->deleteAutoPermission(PermissionGroupDatabaseTypes::Regular, 17835);
+})->doesNotPerformAssertions();
+
+test('delete auto permission by name', function () {
+    $resource = new ServerGroups($this->http);
+
+    $response = new Response(200, ['Content-Type' => 'application/json'], json_encode([
+        'status' => ['code' => 0, 'message' => 'ok'],
+    ]));
+
+    $this->client
+        ->shouldReceive('sendRequest')
+        ->once()
+        ->withArgs(function (Psr7Request $request) {
+            expect($request->getBody()->getContents())->toBeJson()
+                ->json()
+                ->toBe(['sgtype' => '1', 'permsid' => 'b_serverinstance_help_view']);
+
+            return true;
+        })->andReturn($response);
+
+    $resource->deleteAutoPermission(PermissionGroupDatabaseTypes::Regular, 'b_serverinstance_help_view');
+})->doesNotPerformAssertions();
