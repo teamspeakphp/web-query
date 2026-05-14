@@ -25,7 +25,7 @@ final class Permissions implements PermissionsContract
     {
         $payload = new Payload(Command::PermissionList);
 
-        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<list<array{permid: string, permname: string, permdesc: string, permtype: string, permisflag: string}>> $response */
+        /** @var \TeamSpeak\WebQuery\ValueObjects\Transporter\Response<list<array{permid: string, permname: string, permdesc: string}>> $response */
         $response = $this->transporter->request($payload);
 
         return ListResponse::from($response->body());

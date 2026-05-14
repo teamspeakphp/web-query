@@ -10,12 +10,10 @@ final readonly class ListResponsePermission
         public int $id,
         public string $name,
         public string $description,
-        public int $type,
-        public bool $isFlag,
     ) {}
 
     /**
-     * @param  array{permid: string, permname: string, permdesc: string, permtype: string, permisflag: string}  $attributes
+     * @param  array{permid: string, permname: string, permdesc: string}  $attributes
      */
     public static function from(array $attributes): self
     {
@@ -23,8 +21,6 @@ final readonly class ListResponsePermission
             (int) $attributes['permid'],
             $attributes['permname'],
             $attributes['permdesc'],
-            (int) $attributes['permtype'],
-            (bool) $attributes['permisflag'],
         );
     }
 }

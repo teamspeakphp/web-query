@@ -14,7 +14,7 @@ final readonly class ListResponse
     ) {}
 
     /**
-     * @param  list<array{permid: string, permname: string, permdesc: string, permtype: string, permisflag: string}>  $attributes
+     * @param  list<array{permid: string, permname: string, permdesc: string}>  $attributes
      */
     public static function from(array $attributes): self
     {

@@ -31,8 +31,6 @@ test('list', function () {
             'permid' => '1',
             'permname' => 'b_serverinstance_help_view',
             'permdesc' => 'Retrieve information about the server instance',
-            'permtype' => '0',
-            'permisflag' => '1',
         ]],
         'status' => ['code' => 0, 'message' => 'ok'],
     ]));
