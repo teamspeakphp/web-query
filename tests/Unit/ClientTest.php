@@ -16,7 +16,6 @@ use TeamSpeak\WebQuery\Resources\Permissions;
 use TeamSpeak\WebQuery\Resources\PrivilegeKeys;
 use TeamSpeak\WebQuery\Resources\ServerGroups;
 use TeamSpeak\WebQuery\Resources\Servers;
-use TeamSpeak\WebQuery\Resources\Tokens;
 
 beforeEach(function () {
     $this->client = TeamSpeak::client('foo', 'bar', 1);
@@ -76,8 +75,4 @@ it('has server groups', function () {
 
 it('has servers', function () {
     expect($this->client->servers())->toBeInstanceOf(Servers::class);
-});
-
-it('has tokens', function () {
-    expect($this->client->tokens())->toBeInstanceOf(Tokens::class);
 });
